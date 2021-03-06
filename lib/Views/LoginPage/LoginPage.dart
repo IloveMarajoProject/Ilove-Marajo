@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'Componentes/Draggable.dart';
+import 'Componentes/ListaMunicipios.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -40,7 +40,41 @@ class _LoginPageState extends State<LoginPage> {
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(topLeft: Radius.circular(100),topRight: Radius.circular(100))),
-                  child: DraggleTela(controlador),
+                  child: Stack(
+                    alignment: Alignment.topCenter,
+                    children: [
+                      PhysicalModel(
+                        color: Colors.black,
+                        elevation: 8.0,
+                        borderRadius: BorderRadius.circular(52),
+                        child: Container(
+                          height: 60,
+                          width: 200,
+                          padding: EdgeInsets.all(15),
+                          decoration: BoxDecoration(
+                              color: Colors.green,
+                              borderRadius: BorderRadius.circular(50)
+                          ),
+                          child: Flexible(
+                            child: Center(
+                                child: AutoSizeText(
+                                  'Escolha o municipio',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(color: Colors.white,fontSize: 34.0),)),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 70),
+                        child: ListView(
+                          controller: controlador,
+                          children: [
+                            ListaMunicipios('Salvaterra'),
+                          ],
+                        ),
+                      )
+                    ],
+                  )
                 );
               }
           )
