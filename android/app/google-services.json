@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "174172302368",
+    "project_id": "ilove-marajo",
+    "storage_bucket": "ilove-marajo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:174172302368:android:39119c26ecf7f52695a045",
+        "android_client_info": {
+          "package_name": "com.andre.ilovemarajo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "174172302368-hg0m7d6c4om6dsl0ca8vr1u6vq43potq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsplkvvFHBYSYd2MRt7g1qzTLRFA5k_1A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "174172302368-hg0m7d6c4om6dsl0ca8vr1u6vq43potq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
