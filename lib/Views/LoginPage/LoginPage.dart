@@ -1,7 +1,12 @@
+import 'dart:async';
+import 'dart:convert';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:ilovemarajo/Api/Api.dart';
+import 'package:ilovemarajo/Api/MunicipioModel.dart';
+import 'package:ilovemarajo/Api/ProdutosModel.dart';
 import 'Widgets/ListaMunicipios.dart';
 
 class LoginPage extends StatefulWidget {
@@ -11,6 +16,25 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
 
+  List<Produtos>? produtos;
+  StreamController? _controller;
+
+  _getProdutos(){
+    Api.getMunicipios().then((response) {
+      setState(() {
+          Iterable lista = json.decode(response.body);
+          produtos = lista.map((e) => Produtos.fromJson(e)).toList();
+          _controller?.add(lista);
+      });
+    });
+  }
+  
+  @override
+    void initState() {
+      // TODO: implement initState
+      super.initState();
+      _getProdutos();
+    }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +51,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: AutoSizeText(
                   'Ilove \nMarajó',
                   textAlign: TextAlign.center,
-                  style: GoogleFonts.archivoBlack(color: Colors.white,fontSize: 60.0),)),
+                  style: TextStyle(color: Colors.white,fontSize: 60.0),)),
           ),
 
           DraggableScrollableSheet(
@@ -66,12 +90,28 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       Padding(
                         padding: EdgeInsets.only(top: 60),
-                        child: ListView(
-                          controller: controlador,
-                          children: [
-                            ListaMunicipios('Salvaterra'),
-                            ListaMunicipios('Soure')
-                          ],
+
+                        ///StreamBuilder
+                        child: StreamBuilder(
+                          stream: _controller?.stream,  
+                          builder: (context, snapshot) {
+                                if(snapshot.hasError){
+                                  return Center(
+                                    child: Text('Erro inesperado :('),
+                                  );
+                                }else if(!snapshot.hasData){
+                                  return Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                }
+                                return ListView.builder(
+                                  itemCount: produtos?.length,
+                                  controller: controlador,
+                                  itemBuilder: (context,index){
+                                    return ListaMunicipios(produtos![index].title.toString());
+                                  },
+                                );
+                          }
                         )
                       )
                       
