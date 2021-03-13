@@ -17,14 +17,14 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
 
   List<Produtos>? produtos;
-  StreamController? _controller;
+  StreamController _controller = StreamController<Iterable>();
 
   _getProdutos(){
     Api.getMunicipios().then((response) {
       setState(() {
           Iterable lista = json.decode(response.body);
           produtos = lista.map((e) => Produtos.fromJson(e)).toList();
-          _controller?.add(lista);
+          _controller.add(lista);
       });
     });
   }
@@ -93,7 +93,7 @@ class _LoginPageState extends State<LoginPage> {
 
                         ///StreamBuilder
                         child: StreamBuilder(
-                          stream: _controller?.stream,  
+                          stream: _controller.stream,  
                           builder: (context, snapshot) {
                                 if(snapshot.hasError){
                                   return Center(

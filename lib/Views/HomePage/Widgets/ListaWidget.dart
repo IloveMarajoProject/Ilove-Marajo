@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter/rendering.dart';
+import 'package:hexcolor/hexcolor.dart';
 class ListaWidget extends StatefulWidget {
   @override
   _ListaWidgetState createState() => _ListaWidgetState();
@@ -9,24 +10,12 @@ class ListaWidget extends StatefulWidget {
 class _ListaWidgetState extends State<ListaWidget> {
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      scrollDirection: Axis.horizontal,
-      children: [
-        _container(),
-        _container(),
-        _container(),
-      ],
-    );
-  }
-
-
-  Widget _container(){
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 30,horizontal: 10),
-      width: 200,
+      margin: EdgeInsets.symmetric(vertical: 20,horizontal: 10),
+      height: 270,
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(22),
+        borderRadius: BorderRadius.circular(15),
         image: DecorationImage(
           fit: BoxFit.cover,
           image: AssetImage('image/fundos/login.PNG')
@@ -36,36 +25,50 @@ class _ListaWidgetState extends State<ListaWidget> {
       child: Stack(
         children: [
 
-          //Local aonde a ponto está, pode ser a uma vila ou cidade e etc...
-          //Não é o municipio
-          Padding(
-            padding: const EdgeInsets.all(10.0),
+          Align(
+            alignment: Alignment.bottomCenter,
             child: Container(
+              height: 80,
               decoration: BoxDecoration(
-                color: Colors.white54,
-                borderRadius: BorderRadius.circular(2)
+                color: Colors.lightBlue,
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(15),
+                  bottomRight: Radius.circular(15)
+                )
               ),
-              child: AutoSizeText(
-                'Salvaterra',
-                style: TextStyle(fontSize: 15),
-                ),
-            ),
-          ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Flexible(
+                    child: AutoSizeText(
+                      'Praia Grande',
+                      maxLines: 2,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20),
+                      )),
 
-
-          //Nome do ponto turistio
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Align(
-              alignment: Alignment.bottomLeft,
-              child: AutoSizeText(
-                'Praia Grande',
-                maxLines: 2,
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.white
-                ),
-                ),
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: "4.5",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20)
+                        ),
+                        WidgetSpan(
+                          child: Icon(
+                            Icons.star,
+                            size: 20,
+                            color: Colors.white,
+                            ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           )
         ],

@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 import 'Widgets/ListaWidget.dart';
 
@@ -13,6 +14,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black),
         title: Text('Ilove Marajó',style: TextStyle(color: Colors.black),),
@@ -28,37 +30,30 @@ class _HomePageState extends State<HomePage> {
       drawer: Drawer(),
 
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          AutoSizeText(
-            'Pontos Turisticos',
-            maxLines: 1,
-            style: TextStyle(
-              fontSize: 24
-            ),
-            ),
-
-          Expanded(
-            child: Container(
-              height: 200,
-              color: Colors.transparent,
-              child: ListaWidget(),
-            ),
-          ),
-
-          AutoSizeText(
-            'Hotéis e pousadas',
-            maxLines: 1,
-            style: TextStyle(
-              fontSize: 24
-            ),
+          Padding(
+            padding: const EdgeInsets.only(top: 15),
+            child: AutoSizeText(
+              'Pontos Turisticos',
+              maxLines: 1,
+              style: TextStyle(
+                fontSize: 24
+              ),
+              ),
           ),
 
           Expanded(
             child: Container(
-              height: 200,
-              color: Colors.transparent,
-              child: ListaWidget(),
+              color: Colors.white,
+              child: ListView(
+                children: [
+                  ListaWidget(),
+                  ListaWidget(),
+                  ListaWidget(),
+                  ListaWidget(),
+                ],
+              ),
             ),
           ),
         ],
