@@ -1,77 +1,55 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:hexcolor/hexcolor.dart';
-class ListaWidget extends StatefulWidget {
+
+class ListaWidgets extends StatefulWidget {
+  int? indexHome;
+  int? indexPage;
+  String? imageURL;
+  ListaWidgets({this.indexHome,this.indexPage,this.imageURL});
   @override
-  _ListaWidgetState createState() => _ListaWidgetState();
+  _ListaWidgetsState createState() => _ListaWidgetsState();
 }
 
-class _ListaWidgetState extends State<ListaWidget> {
+class _ListaWidgetsState extends State<ListaWidgets> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 20,horizontal: 10),
-      height: 270,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(15),
-        image: DecorationImage(
-          fit: BoxFit.cover,
-          image: AssetImage('image/fundos/login.PNG')
-        )
-      ),
-
-      child: Stack(
-        children: [
-
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              height: 80,
+    return Transform.scale(
+      scale: widget.indexPage == widget.indexHome ? 1.0 : 0.9,
+      child: GestureDetector(
+        onTap: (){
+          print("Deu certo");
+        },
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Container(
+              height: MediaQuery.of(context).size.height - 250,
               decoration: BoxDecoration(
-                color: Colors.lightBlue,
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(15),
-                  bottomRight: Radius.circular(15)
-                )
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Flexible(
-                    child: AutoSizeText(
-                      'Praia Grande',
-                      maxLines: 2,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20),
-                      )),
-
-                  RichText(
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: "4.5",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20)
-                        ),
-                        WidgetSpan(
-                          child: Icon(
-                            Icons.star,
-                            size: 20,
-                            color: Colors.white,
-                            ),
-                        ),
-                      ],
-                    ),
+                  borderRadius: BorderRadius.circular(30),
+                  image: DecorationImage(
+                    fit: BoxFit.fill,
+                    image: AssetImage('image/fundos/login.PNG'),
                   ),
-                ],
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.3),
+                      spreadRadius: 2,
+                      blurRadius: 2,
+                      offset: Offset(2, 3),
+                    )
+                  ]),
+            ),
+            AutoSizeText(
+              "Praia Grande de Salvaterra",
+              maxLines: 1,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.w500,
               ),
             ),
-          )
-        ],
+          ],
+        ),
       ),
     );
   }
