@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:ilovemarajo/Views/InfoPage/InfoPage.dart';
 
 class ListaWidgets extends StatefulWidget {
   int? indexHome;
@@ -17,7 +18,9 @@ class _ListaWidgetsState extends State<ListaWidgets> {
       scale: widget.indexPage == widget.indexHome ? 1.0 : 0.9,
       child: GestureDetector(
         onTap: (){
-          print("Deu certo");
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context)=>InfoPage(widget.imageURL.toString()))
+          );
         },
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -28,7 +31,7 @@ class _ListaWidgetsState extends State<ListaWidgets> {
                   borderRadius: BorderRadius.circular(30),
                   image: DecorationImage(
                     fit: BoxFit.fill,
-                    image: AssetImage('image/fundos/login.PNG'),
+                    image: NetworkImage(widget.imageURL.toString()),
                   ),
                   boxShadow: [
                     BoxShadow(
@@ -40,7 +43,7 @@ class _ListaWidgetsState extends State<ListaWidgets> {
                   ]),
             ),
             AutoSizeText(
-              "Praia Grande de Salvaterra",
+              "Produtos",
               maxLines: 1,
               textAlign: TextAlign.center,
               style: TextStyle(

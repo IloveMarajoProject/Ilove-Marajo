@@ -33,6 +33,7 @@ dependencies:
   source_span: ^1.8.0-nullsafety
   http: ^0.13.0
   hexcolor: ^2.0.3
+  hasura_connect: ^3.0.0+1
 
 dev_dependencies:
   flutter_test:

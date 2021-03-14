@@ -7,7 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:ilovemarajo/Api/Api.dart';
 import 'package:ilovemarajo/Api/MunicipioModel.dart';
 import 'package:ilovemarajo/Api/ProdutosModel.dart';
+import 'package:ilovemarajo/Util/VariaveisGlobais.dart';
 import 'Widgets/ListaMunicipios.dart';
+import 'package:hasura_connect/hasura_connect.dart';
+
 
 class LoginPage extends StatefulWidget {
   @override
@@ -16,24 +19,31 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
 
-  List<Produtos>? produtos;
-  StreamController _controller = StreamController<Iterable>();
+  StreamController _controller = StreamController();
 
-  _getProdutos(){
-    Api.getMunicipios().then((response) {
-      setState(() {
-          Iterable lista = json.decode(response.body);
-          produtos = lista.map((e) => Produtos.fromJson(e)).toList();
-          _controller.add(lista);
+  //Inicializa o servidor com a URL
+  HasuraConnect hasuraConnect = HasuraConnect(HASURA_URL);
+
+
+  //variavel que pega o retorno do metodo #hasura_GetdadosMunicipios# para poder listar os municipios
+  var municipio;
+
+  //Metodo que pega os dados do servidor
+  hasura_GetdadosMunicipios()async{
+    Snapshot snapshot = await hasuraConnect.subscription(subQuery);
+      snapshot.listen((data) {
+        municipio = data["data"]["Municipios"];
+        _controller.add(municipio);
+        print(municipio);
+      }).onError((err) {
+        print(err);
       });
-    });
   }
   
   @override
     void initState() {
-      // TODO: implement initState
       super.initState();
-      _getProdutos();
+      hasura_GetdadosMunicipios();
     }
   @override
   Widget build(BuildContext context) {
@@ -105,10 +115,10 @@ class _LoginPageState extends State<LoginPage> {
                                   );
                                 }
                                 return ListView.builder(
-                                  itemCount: produtos?.length,
+                                  itemCount: municipio.length,
                                   controller: controlador,
                                   itemBuilder: (context,index){
-                                    return ListaMunicipios(produtos![index].title.toString());
+                                    return ListaMunicipios(municipio[index]["nome"]);
                                   },
                                 );
                           }
@@ -124,4 +134,6 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+
+
 }
