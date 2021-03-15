@@ -14,6 +14,8 @@ import 'package:ilovemarajo/Views/InfoPage/InfoPage.dart';
 import 'Widgets/ListaWidget.dart';
 
 class HomePage extends StatefulWidget {
+  int? id;
+  HomePage({this.id});
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -35,7 +37,7 @@ class _HomePageState extends State<HomePage> {
 
       """
       subscription MySubscription {
-        Municipios_by_pk(id: 1) {
+        Municipios_by_pk(id: ${widget.id.toString()}) {
           id
           nome
           PontosTuristicos {

@@ -99,7 +99,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: 60),
+                        padding: EdgeInsets.only(top: 40),
 
                         ///StreamBuilder
                         child: StreamBuilder(
@@ -136,7 +136,9 @@ class _LoginPageState extends State<LoginPage> {
                                         ),
                                         onTap: (){
                                           Navigator.of(context)
-                                            .push(MaterialPageRoute(builder: (context)=>HomePage()));
+                                            .push(MaterialPageRoute(builder: (context)=>HomePage(
+                                              id:municipio[index]["id"],
+                                            )));
                                         },
                                       ),
                                     );

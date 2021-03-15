@@ -53,7 +53,7 @@ class _InfoPageState extends State<InfoPage> {
                             radius: 20,
                             backgroundColor: Colors.white,
                             child: Icon(
-                              Icons.notifications,
+                              Icons.favorite_rounded,
                               color: Colors.black,
                             )),
                       ],
@@ -114,6 +114,38 @@ class _InfoPageState extends State<InfoPage> {
                 ],
               ),
             ),
+
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 10,),
+                  AutoSizeText(
+                    "Comentários",
+                    maxLines: 1,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 35,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: TextField(
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(40)),
+                          ),
+                          hintText: 'Comente algo sobre o lugar',
+                          prefixIcon: Icon(
+                            Icons.send,
+                            color: Colors.black,
+                          )),
+                    ),
+                  ),
+                ],
+              ),
+            )
 
             
           ],
