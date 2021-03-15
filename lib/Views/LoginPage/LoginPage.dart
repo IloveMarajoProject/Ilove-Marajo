@@ -8,7 +8,7 @@ import 'package:ilovemarajo/Api/Api.dart';
 import 'package:ilovemarajo/Api/MunicipioModel.dart';
 import 'package:ilovemarajo/Api/ProdutosModel.dart';
 import 'package:ilovemarajo/Util/VariaveisGlobais.dart';
-import 'Widgets/ListaMunicipios.dart';
+import 'package:ilovemarajo/Views/HomePage/HomePage.dart';
 import 'package:hasura_connect/hasura_connect.dart';
 
 
@@ -118,7 +118,29 @@ class _LoginPageState extends State<LoginPage> {
                                   itemCount: municipio.length,
                                   controller: controlador,
                                   itemBuilder: (context,index){
-                                    return ListaMunicipios(municipio[index]["nome"]);
+
+                                    //Retorna a lista com os nomes dos municipios
+                                    return Padding(
+                                      padding: const EdgeInsets.only(bottom: 10),
+                                      child: GestureDetector(
+                                        child: Flexible(
+                                          child: Center(
+                                              child: AutoSizeText(
+                                                  municipio[index]["nome"],
+                                                  style: TextStyle(
+                                                      fontSize: 26.0,
+                                                      fontWeight: FontWeight.w700,
+                                                      color: Colors.green
+                                                  )
+                                              )),
+                                        ),
+                                        onTap: (){
+                                          Navigator.of(context)
+                                            .push(MaterialPageRoute(builder: (context)=>HomePage()));
+                                        },
+                                      ),
+                                    );
+                                    ///////////////////////////////////////////////
                                   },
                                 );
                           }

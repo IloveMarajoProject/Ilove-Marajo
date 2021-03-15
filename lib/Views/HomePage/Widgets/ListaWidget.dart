@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:ilovemarajo/Views/InfoPage/InfoPage.dart';
 
 class ListaWidgets extends StatefulWidget {
-  int? indexHome;
-  int? indexPage;
-  String? imageURL;
-  ListaWidgets({this.indexHome,this.indexPage,this.imageURL});
+  String? nome;
+  String? perfil;
+  ListaWidgets({this.nome,this.perfil});
   @override
   _ListaWidgetsState createState() => _ListaWidgetsState();
 }
@@ -14,46 +13,36 @@ class ListaWidgets extends StatefulWidget {
 class _ListaWidgetsState extends State<ListaWidgets> {
   @override
   Widget build(BuildContext context) {
-    return Transform.scale(
-      scale: widget.indexPage == widget.indexHome ? 1.0 : 0.9,
-      child: GestureDetector(
-        onTap: (){
-          Navigator.of(context).push(
-            MaterialPageRoute(builder: (context)=>InfoPage(widget.imageURL.toString()))
-          );
-        },
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Container(
-              height: MediaQuery.of(context).size.height - 250,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  image: DecorationImage(
-                    fit: BoxFit.fill,
-                    image: NetworkImage(widget.imageURL.toString()),
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.3),
-                      spreadRadius: 2,
-                      blurRadius: 2,
-                      offset: Offset(2, 3),
-                    )
-                  ]),
-            ),
-            AutoSizeText(
-              "Produtos",
-              maxLines: 1,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.w500,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Container(
+          height: MediaQuery.of(context).size.height - 250,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30),
+              image: DecorationImage(
+                fit: BoxFit.fill,
+                image: NetworkImage(widget.perfil.toString()),
               ),
-            ),
-          ],
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.3),
+                  spreadRadius: 2,
+                  blurRadius: 2,
+                  offset: Offset(2, 3),
+                )
+              ]),
         ),
-      ),
+        AutoSizeText(
+          widget.nome.toString(),
+          maxLines: 1,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ],
     );
   }
 }

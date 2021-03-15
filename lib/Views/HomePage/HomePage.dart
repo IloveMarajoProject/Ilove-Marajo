@@ -4,9 +4,12 @@ import 'dart:convert';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hasura_connect/hasura_connect.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:ilovemarajo/Api/Api.dart';
 import 'package:ilovemarajo/Api/ProdutosModel.dart';
+import 'package:ilovemarajo/Util/VariaveisGlobais.dart';
+import 'package:ilovemarajo/Views/InfoPage/InfoPage.dart';
 
 import 'Widgets/ListaWidget.dart';
 
@@ -17,25 +20,48 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _index = 0;
-  int _selectedIndex = 0;
   
-  List<Produtos>? produtos;
-  StreamController _controller = StreamController<Iterable>();
+  //Inicializa o servidor com a URL
+  HasuraConnect hasuraConnect = HasuraConnect(HASURA_URL);
 
-  _getProdutos(){
-    Api.getMunicipios().then((response) {
-      setState(() {
-          Iterable lista = json.decode(response.body);
-          produtos = lista.map((e) => Produtos.fromJson(e)).toList();
-          _controller.add(lista);
+
+  //variavel que pega o retorno do metodo #hasura_GetdadosMunicipios# para poder listar os municipios
+  var pontosTuristicos;
+  StreamController _controller = StreamController();
+
+  //Metodo que pega os dados do servidor
+  hasura_GetdadosPontosTuristicos()async{
+    Snapshot snapshot = await hasuraConnect.subscription(
+
+      """
+      subscription MySubscription {
+        Municipios_by_pk(id: 1) {
+          id
+          nome
+          PontosTuristicos {
+            id
+            nome
+            descricao
+            perfil
+            longitude
+            latitude
+          }
+        }
+      }
+      """
+    );
+      snapshot.listen((data) {
+        pontosTuristicos = data["data"]["Municipios_by_pk"]["PontosTuristicos"];
+        _controller.add(pontosTuristicos);
+        print(pontosTuristicos);
+      }).onError((err) {
+        print(err);
       });
-    });
   }
   @override
     void initState() {
-      // TODO: implement initState
       super.initState();
-      _getProdutos();
+      hasura_GetdadosPontosTuristicos();
     }
   @override
   Widget build(BuildContext context) {
@@ -99,14 +125,27 @@ class _HomePageState extends State<HomePage> {
                       );
                     }
                       return PageView.builder(
-                        itemCount: produtos?.length,
+                        itemCount: pontosTuristicos.length,
                         controller: PageController(viewportFraction: 0.7),
                         onPageChanged: (int index) => setState(() => _index = index),
                         itemBuilder: (context,index){
-                          return ListaWidgets(
-                            imageURL: produtos?[index].image,
-                            indexHome: _index,
-                            indexPage: index,
+                          return Transform.scale(
+                            scale: index == _index ? 1.0 : 0.9,
+                            child: GestureDetector(
+                              onTap: (){
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(builder: (context)=>InfoPage(
+                                    nome: pontosTuristicos[index]["nome"],
+                                    texto: pontosTuristicos[index]["descricao"],
+                                    perfil: pontosTuristicos[index]["perfil"],
+                                    ))
+                                );
+                              },
+                              child: ListaWidgets(
+                                nome: pontosTuristicos[index]["nome"],
+                                perfil: pontosTuristicos[index]["perfil"],
+                              ),
+                            ),
                           );
                         },
                       );

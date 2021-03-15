@@ -2,8 +2,10 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class InfoPage extends StatefulWidget {
-  String imageURL;
-  InfoPage(this.imageURL);
+  String? nome;
+  String? texto;
+  String? perfil;
+  InfoPage({this.nome,this.texto,this.perfil});
   @override
   _InfoPageState createState() => _InfoPageState();
 }
@@ -26,7 +28,7 @@ class _InfoPageState extends State<InfoPage> {
                     ),
                     image: DecorationImage(
                       fit: BoxFit.fill,
-                      image: NetworkImage(widget.imageURL),
+                      image: NetworkImage(widget.perfil.toString()),
                     ),
                   ),
                 ),
@@ -98,7 +100,7 @@ class _InfoPageState extends State<InfoPage> {
                     height: 10,
                   ),
                   AutoSizeText(
-                    "Praia Grande",
+                    widget.nome.toString(),
                     maxLines: 1,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -109,7 +111,7 @@ class _InfoPageState extends State<InfoPage> {
                     height: 10,
                   ),
                   AutoSizeText(
-                    "Texto",
+                    widget.texto.toString(),
                     style: TextStyle(
                       fontSize: 20,
                     ),
