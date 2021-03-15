@@ -95,14 +95,18 @@ class _HomePageState extends State<HomePage> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: TextField(
+              child: TextFormField(
+                onFieldSubmitted: (value){},
                 decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(40)),
                     ),
                     hintText: 'Para onde deseja ir?',
-                    prefixIcon: Icon(
-                      Icons.search,
+                    suffixIcon: IconButton(
+                      icon:Icon(Icons.search),
+                      onPressed: (){
+                        print('Funcionou');
+                      },
                       color: Colors.black,
                     )),
               ),
@@ -140,6 +144,8 @@ class _HomePageState extends State<HomePage> {
                                   nome: pontosTuristicos[index]["nome"],
                                   texto: pontosTuristicos[index]["descricao"],
                                   perfil: pontosTuristicos[index]["perfil"],
+                                  latitude: pontosTuristicos[index]["latitude"],
+                                  longitude: pontosTuristicos[index]["longitude"],
                                   ))
                               );
                             },

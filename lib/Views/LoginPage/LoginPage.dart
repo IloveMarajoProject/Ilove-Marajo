@@ -65,9 +65,9 @@ class _LoginPageState extends State<LoginPage> {
           ),
 
           DraggableScrollableSheet(
-              initialChildSize: 0.3,
-              maxChildSize: 0.50,
-              minChildSize: 0.3,
+              initialChildSize: 0.2,
+              maxChildSize: 0.30,
+              minChildSize: 0.2,
               builder: (context,controlador){
                 return Container(
                   width: double.infinity,
