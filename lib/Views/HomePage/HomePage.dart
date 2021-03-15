@@ -50,8 +50,8 @@ class _HomePageState extends State<HomePage> {
       }
       """
     );
-      snapshot.listen((data) {
-        pontosTuristicos = data["data"]["Municipios_by_pk"]["PontosTuristicos"];
+      snapshot.listen((data)async{
+        pontosTuristicos = await data["data"]["Municipios_by_pk"]["PontosTuristicos"];
         _controller.add(pontosTuristicos);
         print(pontosTuristicos);
       }).onError((err) {
@@ -109,7 +109,6 @@ class _HomePageState extends State<HomePage> {
             Expanded(
               child: Container(
                 child: StreamBuilder(
-                  initialData: 'Carregando dados',
                   stream: _controller.stream,
                   builder: (context, snapshot) {
 
@@ -124,31 +123,33 @@ class _HomePageState extends State<HomePage> {
                         ),
                       );
                     }
-                      return PageView.builder(
-                        itemCount: pontosTuristicos.length,
-                        controller: PageController(viewportFraction: 0.7),
-                        onPageChanged: (int index) => setState(() => _index = index),
-                        itemBuilder: (context,index){
-                          return Transform.scale(
-                            scale: index == _index ? 1.0 : 0.9,
-                            child: GestureDetector(
-                              onTap: (){
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(builder: (context)=>InfoPage(
-                                    nome: pontosTuristicos[index]["nome"],
-                                    texto: pontosTuristicos[index]["descricao"],
-                                    perfil: pontosTuristicos[index]["perfil"],
-                                    ))
-                                );
-                              },
-                              child: ListaWidgets(
-                                nome: pontosTuristicos[index]["nome"],
-                                perfil: pontosTuristicos[index]["perfil"],
-                              ),
+                    return PageView.builder(
+                      itemCount: pontosTuristicos.length,
+                      controller: PageController(viewportFraction: 0.7),
+                      onPageChanged: (int index) => setState(() => _index = index),
+                      itemBuilder: (context,index){
+                        return Transform.scale(
+                          scale: index == _index ? 1.0 : 0.9,
+                          child: GestureDetector(
+                            onTap: (){
+                              //Navegar para tela de informações
+                              Navigator.of(context).push(
+                                MaterialPageRoute(builder: (context)=>InfoPage(
+                                  nome: pontosTuristicos[index]["nome"],
+                                  texto: pontosTuristicos[index]["descricao"],
+                                  perfil: pontosTuristicos[index]["perfil"],
+                                  ))
+                              );
+                            },
+                            //Lista////////////////////////
+                            child: ListaWidgets(
+                              nome: pontosTuristicos[index]["nome"],
+                              perfil: pontosTuristicos[index]["perfil"],
                             ),
-                          );
-                        },
-                      );
+                          ),
+                        );
+                      },
+                    );
                   }
                 ),
               ),

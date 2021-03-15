@@ -59,15 +59,10 @@ class _InfoPageState extends State<InfoPage> {
                       ],
                   )),
                   Positioned(
-                      bottom: 0,
-                      right: 10,
-                      child: Container(
-                        height: 40,
-                        padding: EdgeInsets.symmetric(horizontal: 10),
-                        decoration: BoxDecoration(
-                          color: Colors.green,
-                          borderRadius: BorderRadius.circular(32)
-                        ),
+                      bottom: 10,
+                      right: 15,
+                      child: ElevatedButton(
+                        onPressed: (){},
                         child: Center(
                           child: RichText(
                             text: TextSpan(
@@ -118,7 +113,9 @@ class _InfoPageState extends State<InfoPage> {
                   ),
                 ],
               ),
-            )
+            ),
+
+            
           ],
         )),
     );

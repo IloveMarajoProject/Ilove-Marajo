@@ -21,7 +21,7 @@ class _ListaWidgetsState extends State<ListaWidgets> {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30),
               image: DecorationImage(
-                fit: BoxFit.fill,
+                fit: BoxFit.cover,
                 image: NetworkImage(widget.perfil.toString()),
               ),
               boxShadow: [
