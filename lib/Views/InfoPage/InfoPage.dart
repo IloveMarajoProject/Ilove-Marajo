@@ -68,7 +68,6 @@ class _InfoPageState extends State<InfoPage> {
         key: validacao,
         child: SafeArea(
           child: ListView(
-            shrinkWrap: true,
             children: [
               Stack(
                 children: [
@@ -227,51 +226,50 @@ class _InfoPageState extends State<InfoPage> {
               ),
               
 
-              Expanded(
-                child: StreamBuilder<QuerySnapshot>(
-                  stream: FirebaseFirestore.instance.collection(widget.nome.toString()).snapshots(),
-                  builder: (context, snapshot) {
+              StreamBuilder<QuerySnapshot>(
+                stream: FirebaseFirestore.instance.collection(widget.nome.toString()).snapshots(),
+                builder: (context, snapshot) {
 
-                    List<DocumentSnapshot>? documentos = snapshot.data?.docs.reversed.toList();
+                  List<DocumentSnapshot>? documentos = snapshot.data?.docs.reversed.toList();
 
-                    if(snapshot.hasError){
-                      return Center(
-                        child: Padding(
-                          padding: const EdgeInsets.only(bottom: 20),
-                          child: Text('Erro inesperado :('),
-                        ),
-                      );
-                    }else if(!snapshot.hasData){
-                      return Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }else if(documentos!.isEmpty){
-                      return Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Center(
-                          child: Text(
-                            "Sem comentarios :(",
-                            style: TextStyle(
-                              fontSize: 20
-                            ),
-                            ),
-                        ),
-                      );
-                    }
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: documentos.length,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemBuilder: (context,index){
-                        return Comentarios(
-                          nome: documentos[index]['nome'],
-                          perfil: documentos[index]['Photourl'],
-                          texto: documentos[index]['texto'],
-                        );
-                      },
+                  if(snapshot.hasError){
+                    return Center(
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 20),
+                        child: Text('Erro inesperado :('),
+                      ),
+                    );
+                  }else if(!snapshot.hasData){
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }else if(documentos!.isEmpty){
+                    return Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Center(
+                        child: Text(
+                          "Sem comentarios :(",
+                          style: TextStyle(
+                            fontSize: 20
+                          ),
+                          ),
+                      ),
                     );
                   }
-                ))
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: documentos.length,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemBuilder: (context,index){
+                      return Comentarios(
+                        nome: documentos[index]['nome'],
+                        perfil: documentos[index]['Photourl'],
+                        texto: documentos[index]['texto'],
+                      );
+                    },
+                  );
+                }
+              )
 
             ],
           )),

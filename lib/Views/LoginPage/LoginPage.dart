@@ -56,13 +56,11 @@ class _LoginPageState extends State<LoginPage> {
                     fit: BoxFit.cover,
                     image: AssetImage('image/fundos/login.PNG'))),
           ),
-          Flexible(
-            child: Center(
-                child: AutoSizeText(
-                  'Ilove \nMarajó',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.white,fontSize: 60.0),)),
-          ),
+          Center(
+              child: AutoSizeText(
+                'Ilove \nMarajó',
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.white,fontSize: 60.0),)),
 
           DraggableScrollableSheet(
               initialChildSize: 0.2,
@@ -89,13 +87,11 @@ class _LoginPageState extends State<LoginPage> {
                               color: Colors.green,
                               borderRadius: BorderRadius.circular(50)
                           ),
-                          child: Flexible(
-                            child: Center(
-                                child: AutoSizeText(
-                                  'Escolha o municipio',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(color: Colors.white,fontSize: 34.0),)),
-                          ),
+                          child: Center(
+                              child: AutoSizeText(
+                                'Escolha o municipio',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(color: Colors.white,fontSize: 34.0),)),
                         ),
                       ),
                       Padding(
@@ -123,17 +119,15 @@ class _LoginPageState extends State<LoginPage> {
                                     return Padding(
                                       padding: const EdgeInsets.only(bottom: 10),
                                       child: GestureDetector(
-                                        child: Flexible(
-                                          child: Center(
-                                              child: AutoSizeText(
-                                                  municipio[index]["nome"],
-                                                  style: TextStyle(
-                                                      fontSize: 26.0,
-                                                      fontWeight: FontWeight.w700,
-                                                      color: Colors.green
-                                                  )
-                                              )),
-                                        ),
+                                        child: Center(
+                                            child: AutoSizeText(
+                                                municipio[index]["nome"],
+                                                style: TextStyle(
+                                                    fontSize: 26.0,
+                                                    fontWeight: FontWeight.w700,
+                                                    color: Colors.green
+                                                )
+                                            )),
                                         onTap: (){
                                           Navigator.of(context)
                                             .push(MaterialPageRoute(builder: (context)=>HomePage(
