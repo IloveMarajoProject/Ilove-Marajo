@@ -45,6 +45,11 @@ class _LoginPageState extends State<LoginPage> {
       super.initState();
       hasura_GetdadosMunicipios();
     }
+
+  late Animation<double> textZoomOut;
+  late AnimationController controller;
+
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

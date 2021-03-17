@@ -36,31 +36,7 @@ class _InfoPageState extends State<InfoPage> {
         });
     }
 
-  //Faz login com o Google
-  Future<User?> _getUser() async {
-    if (currentUser != null) return currentUser;
 
-    try {
-      final GoogleSignInAccount googleSignInAccount = (await googleSignIn
-          .signIn())!;
-      final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount
-          .authentication;
-
-      final AuthCredential credential = GoogleAuthProvider.credential(
-        idToken: googleSignInAuthentication.idToken,
-        accessToken: googleSignInAuthentication.accessToken,
-      );
-
-      var authResult = await FirebaseAuth.instance
-          .signInWithCredential(credential);
-
-      final User user = authResult.user!;
-
-      return user;
-    } catch (error) {
-      return null!;
-    }
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -328,6 +304,32 @@ class _InfoPageState extends State<InfoPage> {
       );
     } catch (e) {
       print(e);
+    }
+  }
+  
+  //Faz login com o Google
+  Future<User?> _getUser() async {
+    if (currentUser != null) return currentUser;
+
+    try {
+      final GoogleSignInAccount googleSignInAccount = (await googleSignIn
+          .signIn())!;
+      final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount
+          .authentication;
+
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        idToken: googleSignInAuthentication.idToken,
+        accessToken: googleSignInAuthentication.accessToken,
+      );
+
+      var authResult = await FirebaseAuth.instance
+          .signInWithCredential(credential);
+
+      final User user = authResult.user!;
+
+      return user;
+    } catch (error) {
+      return null!;
     }
   }
 }
