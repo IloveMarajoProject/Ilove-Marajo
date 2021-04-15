@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:ilovemarajo/app/Views/LiquidPage/LiquidPage.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
-import 'Views/LoginPage/login_page.dart';
-
 class Myapp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

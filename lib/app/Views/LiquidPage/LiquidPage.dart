@@ -1,5 +1,8 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:ilovemarajo/app/Views/LiquidPage/Model/data.dart';
+import 'package:ilovemarajo/app/Views/LiquidPage/Widgets/container_Liquid.dart';
+import 'package:ilovemarajo/app/Views/LiquidPage/Widgets/container_LiquidFinal.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
 
 class LiquidPage extends StatefulWidget {
@@ -18,10 +21,10 @@ class _LiquidPage extends State<LiquidPage> {
     super.initState();
   }
 
-   final pages = [
-    Container(color: Colors.red,),
-    Container(color: Colors.blue,),
-    Container(color: Colors.yellow,),
+   List<ItemData> data = [
+    ItemData(Colors.blue, "image/ilha2.png", "Olá", "Bem vindo ao ", "Ilove Marajó"),
+    ItemData(Colors.deepPurpleAccent, "image/ilha.png", "Take a", "Look At", "Liquid Swipe"),
+    ItemData(Colors.cyan, "image/Icon/loginLiquidi.png", "Liked?", "Fork!", "Give Star!"),
   ];
   Widget _buildDot(int index) {
     double selectedness = Curves.easeOut.transform(
@@ -51,12 +54,17 @@ class _LiquidPage extends State<LiquidPage> {
       home: Scaffold(
           body:Stack(
               children: [
-                LiquidSwipe(
-                  initialPage: 0,
+                LiquidSwipe.builder(
+                  itemCount: data.length,
+                  itemBuilder: (context,index){
+                    if(index == 2){
+                      return  ContainerLiquidFinal(data[2]);
+                    }
+                    return ContainerLiquid(data[index]);
+                  },
                   liquidController: liquidController,
                   enableLoop: false,
                   slideIconWidget: Icon(Icons.arrow_back_ios_rounded),
-                  pages: pages,
                   positionSlideIcon: 0.8,
                   onPageChangeCallback: pageChangeCallback,
                   waveType: WaveType.liquidReveal,
@@ -78,13 +86,12 @@ class _LiquidPage extends State<LiquidPage> {
               alignment: Alignment.bottomRight,
               child: Padding(
                 padding: const EdgeInsets.all(25.0),
-                child: ElevatedButton(
+                child: TextButton(
                   onPressed: () {
                     liquidController?.animateToPage(
-                        page: pages.length - 1, duration: 700);
+                        page: data.length - 1, duration: 700);
                   },
-                  child: Text("Pular para o final"),
-                  //color: Colors.white.withOpacity(0.01),
+                  child: Text("Pular para o final",style: TextStyle(color: Colors.black)),
                 ),
               ),
             ),
@@ -92,15 +99,15 @@ class _LiquidPage extends State<LiquidPage> {
               alignment: Alignment.bottomLeft,
               child: Padding(
                 padding: const EdgeInsets.all(25.0),
-                child: ElevatedButton(
+                child: TextButton(
                   onPressed: () {
                     liquidController?.animateToPage(
                         page:
-                            liquidController!.currentPage + 1 > pages.length - 1
+                            liquidController!.currentPage + 1 > data.length - 1
                                 ? 0
                                 : liquidController!.currentPage + 1);
                   },
-                  child: Text("Avançar"),
+                  child: Text("Avançar",style: TextStyle(color: Colors.black)),
                 ),
               ),
             )

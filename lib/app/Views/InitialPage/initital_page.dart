@@ -7,7 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ilovemarajo/app/Util/VariaveisGlobais.dart';
 import 'package:ilovemarajo/app/Views/HomePage/home_page.dart';
-import 'package:ilovemarajo/app/Views/LoginPage/Widgets/municipios_nome.dart';
+import 'package:ilovemarajo/app/Views/InitialPage/Widgets/municipios_nome.dart';
 
 
 class LoginPage extends StatefulWidget {
