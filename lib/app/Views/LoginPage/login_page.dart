@@ -2,14 +2,12 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ilovemarajo/Api/Api.dart';
-import 'package:ilovemarajo/Api/MunicipioModel.dart';
-import 'package:ilovemarajo/Api/ProdutosModel.dart';
-import 'package:ilovemarajo/Util/VariaveisGlobais.dart';
-import 'package:ilovemarajo/Views/HomePage/HomePage.dart';
-import 'package:hasura_connect/hasura_connect.dart';
+import 'package:ilovemarajo/app/Util/VariaveisGlobais.dart';
+import 'package:ilovemarajo/app/Views/HomePage/home_page.dart';
+import 'package:ilovemarajo/app/Views/LoginPage/Widgets/municipios_nome.dart';
 
 
 class LoginPage extends StatefulWidget {
@@ -18,37 +16,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
-  StreamController _controller = StreamController();
-
-  //Inicializa o servidor com a URL
-  HasuraConnect hasuraConnect = HasuraConnect(HASURA_URL);
-
-
-  //variavel que pega o retorno do metodo #hasura_GetdadosMunicipios# para poder listar os municipios
-  var municipio;
-
-  //Metodo que pega os dados do servidor
-  hasura_GetdadosMunicipios()async{
-    Snapshot snapshot = await hasuraConnect.subscription(subQuery);
-      snapshot.listen((data) {
-        municipio = data["data"]["Municipios"];
-        _controller.add(municipio);
-        print(municipio);
-      }).onError((err) {
-        print(err);
-      });
-  }
-  
-  @override
-    void initState() {
-      super.initState();
-      hasura_GetdadosMunicipios();
-    }
-
-  late Animation<double> textZoomOut;
-  late AnimationController controller;
-
   
   @override
   Widget build(BuildContext context) {
@@ -65,7 +32,10 @@ class _LoginPageState extends State<LoginPage> {
               child: AutoSizeText(
                 'Ilove \nMarajó',
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.white,fontSize: 60.0),)),
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  fontSize: 60.0))),
 
           DraggableScrollableSheet(
               initialChildSize: 0.2,
@@ -101,10 +71,8 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       Padding(
                         padding: EdgeInsets.only(top: 40),
-
-                        ///StreamBuilder
-                        child: StreamBuilder(
-                          stream: _controller.stream,  
+                        child: StreamBuilder<QuerySnapshot>(
+                          stream: FirebaseFirestore.instance.collection('Municipios').snapshots(),  
                           builder: (context, snapshot) {
                                 if(snapshot.hasError){
                                   return Center(
@@ -115,33 +83,19 @@ class _LoginPageState extends State<LoginPage> {
                                     child: CircularProgressIndicator(),
                                   );
                                 }
+                                List<DocumentSnapshot>? documentos = snapshot.data?.docs.toList();
+                                if(documentos!.isEmpty){
+                                  return Center(
+                                    child: Text('Sem municipios :)'),
+                                  );
+                                }
                                 return ListView.builder(
-                                  itemCount: municipio.length,
+                                  itemCount: documentos.length,
                                   controller: controlador,
                                   itemBuilder: (context,index){
-
-                                    //Retorna a lista com os nomes dos municipios
-                                    return Padding(
-                                      padding: const EdgeInsets.only(bottom: 10),
-                                      child: GestureDetector(
-                                        child: Center(
-                                            child: AutoSizeText(
-                                                municipio[index]["nome"],
-                                                style: TextStyle(
-                                                    fontSize: 26.0,
-                                                    fontWeight: FontWeight.w700,
-                                                    color: Colors.green
-                                                )
-                                            )),
-                                        onTap: (){
-                                          Navigator.of(context)
-                                            .push(MaterialPageRoute(builder: (context)=>HomePage(
-                                              id:municipio[index]["id"],
-                                            )));
-                                        },
-                                      ),
+                                    return NomesMunicipios(
+                                      documentos[index]
                                     );
-                                    ///////////////////////////////////////////////
                                   },
                                 );
                           }
