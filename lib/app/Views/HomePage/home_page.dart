@@ -115,9 +115,9 @@ class _HomePageState extends State<HomePage> {
                               icon: Icon(Icons.search),
                               onPressed: controller.isButtonActivate ?(){
                                 controller.editingController.clear();
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text(controller.pesquisa.toString()))
-                                );
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(content: Text(controller.pesquisa.toString()))
+                                  );
                                 focusNode.unfocus();
                                 controller.removePesquisa();
                               }

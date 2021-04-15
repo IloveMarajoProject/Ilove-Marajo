@@ -16,10 +16,10 @@ abstract class _AvaliacaoController with Store {
   GlobalKey<FormState> validacao = GlobalKey<FormState>();
 
   @action
-  void setPesquisa(String value) => pesquisa = value;
+  void setAvaliacao(String value) => pesquisa = value;
 
   @action
-  void removePesquisa()=> pesquisa = '';
+  void removeAvaliacao()=> pesquisa = '';
 
   @computed
   bool get isButtonActivate => pesquisa.length > 3;

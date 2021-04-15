@@ -19,8 +19,7 @@ class _InfoPageState extends State<InfoPage> {
 
   final GoogleSignIn googleSignIn = GoogleSignIn();
   User? currentUser; 
-  TextEditingController mensagem = TextEditingController();
-  GlobalKey<FormState> validacao = GlobalKey<FormState>();
+  
   @override
     void initState() {
       super.initState();

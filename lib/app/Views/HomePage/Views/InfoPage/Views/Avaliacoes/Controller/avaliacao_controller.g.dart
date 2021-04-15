@@ -67,22 +67,22 @@ mixin _$AvaliacaoController on _AvaliacaoController, Store {
       ActionController(name: '_AvaliacaoController');
 
   @override
-  void setPesquisa(String value) {
+  void setAvaliacao(String value) {
     final _$actionInfo = _$_AvaliacaoControllerActionController.startAction(
-        name: '_AvaliacaoController.setPesquisa');
+        name: '_AvaliacaoController.setAvaliacao');
     try {
-      return super.setPesquisa(value);
+      return super.setAvaliacao(value);
     } finally {
       _$_AvaliacaoControllerActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  void removePesquisa() {
+  void removeAvaliacao() {
     final _$actionInfo = _$_AvaliacaoControllerActionController.startAction(
-        name: '_AvaliacaoController.removePesquisa');
+        name: '_AvaliacaoController.removeAvaliacao');
     try {
-      return super.removePesquisa();
+      return super.removeAvaliacao();
     } finally {
       _$_AvaliacaoControllerActionController.endAction(_$actionInfo);
     }

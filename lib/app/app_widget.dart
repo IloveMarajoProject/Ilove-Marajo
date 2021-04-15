@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ilovemarajo/app/Views/LiquidPage/LiquidPage.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 import 'Views/LoginPage/login_page.dart';
@@ -17,7 +18,7 @@ class Myapp extends StatelessWidget {
             ResponsiveBreakpoint.resize(800, name: TABLET),
         ]
         ),
-      home: LoginPage(),
+      home: LiquidPage(),
     );
   }
 }
