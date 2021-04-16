@@ -3,20 +3,22 @@ import 'dart:convert';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ilovemarajo/app/Util/Controller/GoogleLoginController/google_controller.dart';
 import 'package:ilovemarajo/app/Util/VariaveisGlobais.dart';
 import 'package:ilovemarajo/app/Views/HomePage/home_page.dart';
 import 'package:ilovemarajo/app/Views/InitialPage/Widgets/municipios_nome.dart';
 
 
-class LoginPage extends StatefulWidget {
+class InitialPage extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _InitialPageState createState() => _InitialPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
-  
+class _InitialPageState extends State<InitialPage> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

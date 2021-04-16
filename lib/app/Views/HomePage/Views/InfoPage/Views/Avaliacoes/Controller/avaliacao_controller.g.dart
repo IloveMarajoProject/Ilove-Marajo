@@ -48,6 +48,21 @@ mixin _$AvaliacaoController on _AvaliacaoController, Store {
     });
   }
 
+  final _$estrelasAtom = Atom(name: '_AvaliacaoController.estrelas');
+
+  @override
+  double get estrelas {
+    _$estrelasAtom.reportRead();
+    return super.estrelas;
+  }
+
+  @override
+  set estrelas(double value) {
+    _$estrelasAtom.reportWrite(value, super.estrelas, () {
+      super.estrelas = value;
+    });
+  }
+
   final _$validacaoAtom = Atom(name: '_AvaliacaoController.validacao');
 
   @override
@@ -65,6 +80,17 @@ mixin _$AvaliacaoController on _AvaliacaoController, Store {
 
   final _$_AvaliacaoControllerActionController =
       ActionController(name: '_AvaliacaoController');
+
+  @override
+  void setEstrelas(double star) {
+    final _$actionInfo = _$_AvaliacaoControllerActionController.startAction(
+        name: '_AvaliacaoController.setEstrelas');
+    try {
+      return super.setEstrelas(star);
+    } finally {
+      _$_AvaliacaoControllerActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void setAvaliacao(String value) {
@@ -93,6 +119,7 @@ mixin _$AvaliacaoController on _AvaliacaoController, Store {
     return '''
 pesquisa: ${pesquisa},
 editingController: ${editingController},
+estrelas: ${estrelas},
 validacao: ${validacao},
 isButtonActivate: ${isButtonActivate}
     ''';

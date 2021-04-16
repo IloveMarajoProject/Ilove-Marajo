@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:ilovemarajo/app/Util/Controller/GoogleLoginController/google_controller.dart';
+import 'package:ilovemarajo/app/Util/Controller/SharedPreference/shared_preference.dart';
+import 'package:ilovemarajo/app/Util/Widgets/showDialog.dart';
+import 'package:ilovemarajo/app/Views/InitialPage/initital_page.dart';
 import 'package:ilovemarajo/app/Views/LiquidPage/Model/data.dart';
 import 'package:auth_buttons/auth_buttons.dart';
+import 'package:liquid_swipe/liquid_swipe.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class ContainerLiquidFinal extends StatelessWidget {
+class ContainerLiquidFinal extends StatefulWidget {
   final ItemData data;
   ContainerLiquidFinal(this.data);
   static final style = TextStyle(
@@ -11,36 +18,83 @@ class ContainerLiquidFinal extends StatelessWidget {
     color: Colors.black,
     fontWeight: FontWeight.w600,
   );
+
+  @override
+  _ContainerLiquidFinalState createState() => _ContainerLiquidFinalState();
+}
+
+class _ContainerLiquidFinalState extends State<ContainerLiquidFinal> {
+  GoogleLoginController _liquidController = GoogleLoginController();
+  SharedPreferenceController _sharedPreferenceController = SharedPreferenceController();
+
   @override
   Widget build(BuildContext context) {
     const bool darkMode = false;
-    return Container(
-      color: data.color,
-      width: double.infinity,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Image.asset(
-            data.image,
-            fit: BoxFit.cover,
-            height: 200,
+    return Observer(
+      builder: (_) {
+        return Container(
+          color: widget.data.color,
+          width: double.infinity,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Image.asset(
+                widget.data.image,
+                fit: BoxFit.cover,
+                height: 200,
+              ),
+              Text('Para começar',style: ContainerLiquidFinal.style,),
+              Text('faça login com uma das plataformas disponiveis', textAlign: TextAlign.center,style: ContainerLiquidFinal.style,),
+              SizedBox(height: 20,),
+              GoogleAuthButton(
+                text: 'Login com google',
+                onPressed: () {
+                  _liquidController.getUser(context).then((value) {
+                    _sharedPreferenceController.loginAuth();
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (_)=>InitialPage())
+                    );
+                  }).catchError((e){
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text("Não foi possivel fazer o login. Tente novamente"),
+                        backgroundColor: Colors.red,
+                      )
+                    );
+                    print(e);
+                  });
+                },
+                darkMode: darkMode,
+                isLoading: _liquidController.loading,
+              ),
+              SizedBox(height: 20,),
+              AppleAuthButton(
+                text: 'Login com a Apple',
+                onPressed: () {
+                  showDialog(
+                    context: context, 
+                    builder: (context){
+                      return ShowDialogGlobal(
+                        titulo: 'Aviso:',
+                        texto: 'Botão disponível apenas para dispositivos IOS',
+                        botaoAction: pop,
+                        nomeBotao: 'Continuar',
+                        twoButton: false,
+                      );
+                    }
+                  );
+                },
+                darkMode: darkMode,
+                isLoading: false,
+              ),
+            ],
           ),
-          Text('Para começar',style: style,),
-          Text('Faça login com uma das plataformas disponiveis', textAlign: TextAlign.center,style: style,),
-          SizedBox(height: 20,),
-          GoogleAuthButton(
-            onPressed: () {},
-            darkMode: darkMode,
-            isLoading: false,
-          ),
-          SizedBox(height: 20,),
-          AppleAuthButton(
-            onPressed: () {},
-            darkMode: darkMode,
-            isLoading: false,
-          ),
-        ],
-      ),
+        );
+      }
     );
+  }
+
+  void pop(context){
+    Navigator.of(context).pop();
   }
 }

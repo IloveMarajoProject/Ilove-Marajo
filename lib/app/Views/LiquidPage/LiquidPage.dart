@@ -23,8 +23,8 @@ class _LiquidPage extends State<LiquidPage> {
 
    List<ItemData> data = [
     ItemData(Colors.blue, "image/ilha2.png", "Olá", "Bem vindo ao ", "Ilove Marajó"),
-    ItemData(Colors.deepPurpleAccent, "image/ilha.png", "Take a", "Look At", "Liquid Swipe"),
-    ItemData(Colors.cyan, "image/Icon/loginLiquidi.png", "Liked?", "Fork!", "Give Star!"),
+    ItemData(Colors.purple, "image/ilha.png", "Encontre os melhores", "Pontos turisticos", "do Marajó aqui"),
+    ItemData(Colors.cyan, "image/fundos/bufalo.png", "Liked?", "Fork!", "Give Star!"),
   ];
   Widget _buildDot(int index) {
     double selectedness = Curves.easeOut.transform(

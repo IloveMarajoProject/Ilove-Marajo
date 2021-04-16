@@ -1,24 +1,34 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mobx/mobx.dart';
-part 'liquid_controller.g.dart';
+part 'google_controller.g.dart';
 
 
-class LiquidController = _LiquidController with _$LiquidController;
+class GoogleLoginController = _GoogleLoginController with _$GoogleLoginController;
 
-abstract class _LiquidController with Store {
+abstract class _GoogleLoginController with Store {
 
   @observable
-  final GoogleSignIn googleSignIn = GoogleSignIn();
+  GoogleSignIn googleSignIn = GoogleSignIn();
 
   @observable
   User? currentUser; 
 
-  @action
-  void setUser(User user)=> currentUser = user;
+  @observable
+  bool loading = false;
 
   @action
-  Future<User?> _getUser() async {
+  void setUser(User? user)=> currentUser = user;
+
+  @action
+  logoutGoogle(){
+    googleSignIn.signOut();
+  }
+
+  @action
+  Future<User?> getUser(BuildContext context) async {
+    loading = true;
     if (currentUser != null) return currentUser;
 
     try {
@@ -37,8 +47,12 @@ abstract class _LiquidController with Store {
 
       final User user = authResult.user!;
 
+      loading = false;
+
       return user;
+
     } catch (error) {
+      loading = false;
       return null!;
     }
   }

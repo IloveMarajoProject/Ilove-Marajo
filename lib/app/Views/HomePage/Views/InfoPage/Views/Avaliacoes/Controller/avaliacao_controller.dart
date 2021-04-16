@@ -13,6 +13,12 @@ abstract class _AvaliacaoController with Store {
   TextEditingController editingController = TextEditingController();
 
   @observable
+  double estrelas = 0.0;
+
+  @action
+  void setEstrelas(double star) => estrelas = star;
+
+  @observable
   GlobalKey<FormState> validacao = GlobalKey<FormState>();
 
   @action
@@ -22,7 +28,7 @@ abstract class _AvaliacaoController with Store {
   void removeAvaliacao()=> pesquisa = '';
 
   @computed
-  bool get isButtonActivate => pesquisa.length > 3;
+  bool get isButtonActivate => pesquisa.length > 3 && estrelas > 0.0;
 }
 
 //flutter pub run build_runner build

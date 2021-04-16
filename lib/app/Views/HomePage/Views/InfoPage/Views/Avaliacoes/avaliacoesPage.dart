@@ -1,9 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:ilovemarajo/app/Util/Controller/GoogleLoginController/google_controller.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Views/InfoPage/Views/Avaliacoes/Controller/avaliacao_controller.dart';
 
 class Avaliacao extends StatefulWidget {
+  final DocumentSnapshot documentSnapshot;
+
+  Avaliacao(this.documentSnapshot);
   @override
   _AvaliacaoState createState() => _AvaliacaoState();
 }
@@ -11,6 +17,19 @@ class Avaliacao extends StatefulWidget {
 class _AvaliacaoState extends State<Avaliacao> {
   FocusNode focusNode = new FocusNode();
   AvaliacaoController _controller = AvaliacaoController();
+  GoogleLoginController _GoogleControllerPage = GoogleLoginController();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    FirebaseAuth.instance
+      .authStateChanges()
+      .listen((user) {
+        setState(() {
+          _GoogleControllerPage.setUser(user);            
+        });
+      });
+  }
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -30,16 +49,28 @@ class _AvaliacaoState extends State<Avaliacao> {
         ),
 
         actions: [
-          ElevatedButton(
-            onPressed: _controller.isButtonActivate?(){
-              _controller.editingController.clear();
-              _controller.removeAvaliacao();
-              focusNode.unfocus();
+          Observer(
+            builder: (_) {
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                  onPressed: _controller.isButtonActivate?()async{
+                    await enviarAvaliacao(
+                      star: _controller.estrelas,
+                      texto: _controller.pesquisa
+                    );
+                    _controller.editingController.clear();
+                    _controller.removeAvaliacao();
+                    focusNode.unfocus();
+                    Navigator.of(context).pop();
+                  }
+                  :
+                  null
+                  , 
+                  child: Text('Enviar')
+                ),
+              );
             }
-            :
-            null
-            , 
-            child: Text('Enviar')
           )
         ],
       ),
@@ -63,7 +94,7 @@ class _AvaliacaoState extends State<Avaliacao> {
                     ),
                     itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
                     onRatingUpdate: (rating) {
-                      print(rating);
+                      _controller.setEstrelas(rating);
                     },
                   ),
                 ),
@@ -109,4 +140,15 @@ class _AvaliacaoState extends State<Avaliacao> {
       ),
     );
   }
+
+  Future enviarAvaliacao({String? texto,double? star})async{
+    Map<String, dynamic> data = {
+      "uid" : _GoogleControllerPage.currentUser!.uid.toString(),
+      "star": star,
+      "nome": _GoogleControllerPage.currentUser!.displayName.toString(),
+      "texto": texto,
+      "Time": FieldValue.serverTimestamp()
+    };
+    return await FirebaseFirestore.instance.collection('Avaliacoes').doc(widget.documentSnapshot['nome']).set(data); //collection(_GoogleControllerPage.currentUser!.uid).add(data);
+  } 
 }

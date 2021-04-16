@@ -17,21 +17,7 @@ class InfoPage extends StatefulWidget {
 
 class _InfoPageState extends State<InfoPage> {
 
-  final GoogleSignIn googleSignIn = GoogleSignIn();
-  User? currentUser; 
   
-  @override
-    void initState() {
-      super.initState();
-      FirebaseAuth.instance
-        .authStateChanges()
-        .listen((user) {
-          setState(() {
-            currentUser = user!;            
-          });
-        });
-    }
-
 
   @override
   Widget build(BuildContext context) {
@@ -143,7 +129,7 @@ class _InfoPageState extends State<InfoPage> {
                         barrierColor: Colors.black.withOpacity(0.5),
                         transitionDuration: Duration(milliseconds: 200),
                         pageBuilder: (context, anim1, anim2) {
-                          return Avaliacao();
+                          return Avaliacao(widget.documentSnapshot);
                         },
                         transitionBuilder: (context, anim1, anim2, child) {
                           return SlideTransition(
@@ -179,17 +165,7 @@ class _InfoPageState extends State<InfoPage> {
   }
 
 
-  //Metodo que envia a mensagem
-  Future enviarMensagem({String? texto})async{
-    Map<String, dynamic> data = {
-      "uid" : currentUser!.uid,
-      "nome": currentUser!.displayName,
-      "texto": texto,
-      "Photourl": currentUser!.photoURL,
-      "Time": FieldValue.serverTimestamp()
-    };
-    //return await FirebaseFirestore.instance.collection(widget.nome.toString()).add(data);
-  }
+
 
 
   //Metodo que abre o mapa
@@ -231,32 +207,6 @@ class _InfoPageState extends State<InfoPage> {
       );
     } catch (e) {
       print(e);
-    }
-  }
-  
-  //Faz login com o Google
-  Future<User?> _getUser() async {
-    if (currentUser != null) return currentUser;
-
-    try {
-      final GoogleSignInAccount googleSignInAccount = (await googleSignIn
-          .signIn())!;
-      final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount
-          .authentication;
-
-      final AuthCredential credential = GoogleAuthProvider.credential(
-        idToken: googleSignInAuthentication.idToken,
-        accessToken: googleSignInAuthentication.accessToken,
-      );
-
-      var authResult = await FirebaseAuth.instance
-          .signInWithCredential(credential);
-
-      final User user = authResult.user!;
-
-      return user;
-    } catch (error) {
-      return null!;
     }
   }
 }
