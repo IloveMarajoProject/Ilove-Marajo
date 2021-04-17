@@ -58,11 +58,25 @@ class _AvaliacaoState extends State<Avaliacao> {
                     await enviarAvaliacao(
                       star: _controller.estrelas,
                       texto: _controller.pesquisa
-                    );
-                    _controller.editingController.clear();
-                    _controller.removeAvaliacao();
-                    focusNode.unfocus();
-                    Navigator.of(context).pop();
+                    ).then((value) {
+                      _controller.editingController.clear();
+                      _controller.removeAvaliacao();
+                      focusNode.unfocus();
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text("Mensagem enviada"),
+                          backgroundColor: Colors.blue,
+                        )
+                      );
+                      Navigator.of(context).pop();
+                    }).catchError((e) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text("Erro ao enviar mensagem"),
+                          backgroundColor: Colors.red,
+                        )
+                      );
+                    });
                   }
                   :
                   null
@@ -141,7 +155,7 @@ class _AvaliacaoState extends State<Avaliacao> {
     );
   }
 
-  Future enviarAvaliacao({String? texto,double? star})async{
+  Future enviarAvaliacao({String? texto,double? star}) async {
     Map<String, dynamic> data = {
       "uid" : _GoogleControllerPage.currentUser!.uid.toString(),
       "star": star,
@@ -149,6 +163,6 @@ class _AvaliacaoState extends State<Avaliacao> {
       "texto": texto,
       "Time": FieldValue.serverTimestamp()
     };
-    return await FirebaseFirestore.instance.collection('Avaliacoes').doc(widget.documentSnapshot['nome']).set(data); //collection(_GoogleControllerPage.currentUser!.uid).add(data);
+    return await FirebaseFirestore.instance.collection('Avaliacoes').doc(widget.documentSnapshot['nome']).collection('notas').add(data);
   } 
 }

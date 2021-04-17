@@ -1,8 +1,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class AvaliacoesContainer extends StatelessWidget {
+  DocumentSnapshot documentSnapshot;
+  AvaliacoesContainer(this.documentSnapshot);
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -19,7 +22,7 @@ class AvaliacoesContainer extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 10,bottom: 10,top: 10),
               child: AutoSizeText(
-                'Nome da pessoa',
+                documentSnapshot['nome'],
                 style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.bold
@@ -29,7 +32,7 @@ class AvaliacoesContainer extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 8),
               child: RatingBar(
-                initialRating: 3,
+                initialRating: documentSnapshot['star'],
                 itemSize: 15,
                 direction: Axis.horizontal,
                 allowHalfRating: true,
@@ -49,7 +52,7 @@ class AvaliacoesContainer extends StatelessWidget {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: AutoSizeText('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'),
+                child: AutoSizeText(documentSnapshot['texto']),
               )
             ),
 
@@ -57,7 +60,7 @@ class AvaliacoesContainer extends StatelessWidget {
               alignment: Alignment.bottomRight,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: AutoSizeText('data'),
+                child: AutoSizeText('Data'),
               ),
             )
           ],

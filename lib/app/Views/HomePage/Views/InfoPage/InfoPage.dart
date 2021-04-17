@@ -2,7 +2,9 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:ilovemarajo/app/Views/HomePage/Views/InfoPage/Controller/info_controller.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Views/InfoPage/Views/Avaliacoes/avaliacoesPage.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Views/InfoPage/Widgets/avaliacoes.dart';
 import 'package:map_launcher/map_launcher.dart';
@@ -17,7 +19,7 @@ class InfoPage extends StatefulWidget {
 
 class _InfoPageState extends State<InfoPage> {
 
-  
+  InfoController controller = InfoController();
 
   @override
   Widget build(BuildContext context) {
@@ -54,11 +56,28 @@ class _InfoPageState extends State<InfoPage> {
                           Navigator.of(context).pop();
                         }
                       ),
-                      IconButton(
-                        color: Colors.white,
-                        icon: Icon(Icons.star_border),
-                        iconSize: 35,
-                        onPressed: (){}
+                      Observer(
+                        builder: (_) {
+                          return IconButton(
+                            color: controller.isButtonFavorite? 
+                              Colors.yellow
+                              :
+                              Colors.white
+                            ,
+                            icon: controller.isButtonFavorite?
+                              Icon(Icons.star)
+                              :
+                              Icon(Icons.star_border)
+                            ,
+                            iconSize: 35,
+                            onPressed: (){
+                              controller.isButtonFavorite?
+                                controller.removeBotao()
+                                :
+                                controller.enableBotao();
+                            }
+                          );
+                        }
                       )
                     ],
                   ),
@@ -146,15 +165,36 @@ class _InfoPageState extends State<InfoPage> {
               ),
               Container(
                 height: 250,
-                child: ListView(
-                  physics: ClampingScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  shrinkWrap: true,
-                  children: [
-                    AvaliacoesContainer(),
-                    AvaliacoesContainer(),
-                    AvaliacoesContainer(),
-                  ],
+                child: StreamBuilder<QuerySnapshot>(
+                  stream: FirebaseFirestore.instance.collection('Avaliacoes').doc(widget.documentSnapshot['nome']).collection('notas').snapshots(),
+                  builder: (context, snapshot) {
+                    if(snapshot.hasError){
+                      return Center(
+                        child: Text('Erro inesperado :('),
+                      );
+                    }else if(!snapshot.hasData){
+                      return Center(
+                        child: CircularProgressIndicator(
+                          backgroundColor: Colors.red,
+                        ),
+                      );
+                    }
+                    List<DocumentSnapshot>? documentos = snapshot.data?.docs.toList();
+                    if(documentos!.isEmpty){
+                      return Center(
+                        child: Text('Sem avaliações :)',style: TextStyle(fontSize: 18),),
+                      );
+                    }
+                    return ListView.builder(
+                      itemCount: documentos.length,
+                      physics: ClampingScrollPhysics(),
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      itemBuilder: (context,index){
+                        return AvaliacoesContainer(documentos[index]);
+                      },
+                    );
+                  }
                 ),
               )
             ],
