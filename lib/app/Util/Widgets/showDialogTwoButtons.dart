@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
-class ShowDialogGlobal extends StatelessWidget {
+class ShowDialogTwoButtonGlobal extends StatelessWidget {
   final String? titulo;
   final String? texto;
   final String? nomeBotao;
   final void Function(BuildContext context) botaoAction;
 
-  ShowDialogGlobal({required this.titulo, required this.botaoAction,this.nomeBotao,this.texto});
-
+  ShowDialogTwoButtonGlobal({required this.titulo, required this.botaoAction,this.nomeBotao,this.texto});
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -21,7 +19,12 @@ class ShowDialogGlobal extends StatelessWidget {
           ),
         ),
         actions: <Widget> [
-        
+          TextButton(
+            child: Text('Cancelar',style: TextStyle(color: Colors.red),),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
           TextButton(
             child: nomeBotao != null? Text(nomeBotao.toString()) : Text('Aceitar'),
             onPressed: () {

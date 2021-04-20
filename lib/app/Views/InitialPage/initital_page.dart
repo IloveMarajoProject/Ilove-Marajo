@@ -40,9 +40,9 @@ class _InitialPageState extends State<InitialPage> {
                   fontSize: 60.0))),
 
           DraggableScrollableSheet(
-              initialChildSize: 0.2,
-              maxChildSize: 0.30,
-              minChildSize: 0.2,
+              initialChildSize: 0.35,
+              maxChildSize: 0.5,
+              minChildSize: 0.3,
               builder: (context,controlador){
                 return Container(
                   width: double.infinity,
@@ -72,7 +72,7 @@ class _InitialPageState extends State<InitialPage> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: 40),
+                        padding: EdgeInsets.only(top: 60),
                         child: StreamBuilder<QuerySnapshot>(
                           stream: FirebaseFirestore.instance.collection('Municipios').snapshots(),  
                           builder: (context, snapshot) {

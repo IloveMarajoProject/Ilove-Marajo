@@ -12,6 +12,7 @@ import 'package:ilovemarajo/app/Util/Controller/GoogleLoginController/google_con
 import 'package:ilovemarajo/app/Util/Controller/SharedPreference/shared_preference.dart';
 import 'package:ilovemarajo/app/Util/VariaveisGlobais.dart';
 import 'package:ilovemarajo/app/Util/Widgets/showDialog.dart';
+import 'package:ilovemarajo/app/Util/Widgets/showDialogTwoButtons.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Controller/home_controller.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Views/Drawer/drawer.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Views/InfoPage/InfoPage.dart';
@@ -83,12 +84,11 @@ class _HomePageState extends State<HomePage> {
                                 showDialog(
                                   context: context, 
                                   builder: (context){
-                                    return ShowDialogGlobal(
+                                    return ShowDialogTwoButtonGlobal(
                                       titulo: 'Aviso:',
                                       texto: 'Deseja mesmo sair da sua conta ?',
                                       botaoAction: actionButtonShow,
                                       nomeBotao: 'Continuar',
-                                      twoButton: true,
                                     );
                                   }
                                 );

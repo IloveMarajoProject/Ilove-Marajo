@@ -47,6 +47,9 @@ dependencies:
   liquid_swipe: ^2.0.2
   auth_buttons: ^1.0.1
   shared_preferences: ^2.0.5
+  hasura_connect: ^3.0.0+1
+  firebase_messaging: ^9.1.1
+  connectivity: ^3.0.3
 
   
 dev_dependencies:

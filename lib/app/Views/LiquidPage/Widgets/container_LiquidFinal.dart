@@ -79,7 +79,6 @@ class _ContainerLiquidFinalState extends State<ContainerLiquidFinal> {
                         texto: 'Botão disponível apenas para dispositivos IOS',
                         botaoAction: pop,
                         nomeBotao: 'Continuar',
-                        twoButton: false,
                       );
                     }
                   );
