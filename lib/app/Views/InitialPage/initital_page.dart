@@ -3,13 +3,17 @@ import 'dart:convert';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:connectivity/connectivity.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ilovemarajo/app/Util/Controller/Connectivity/connectivity_controller.dart';
 import 'package:ilovemarajo/app/Util/Controller/GoogleLoginController/google_controller.dart';
 import 'package:ilovemarajo/app/Util/VariaveisGlobais.dart';
+import 'package:ilovemarajo/app/Util/Widgets/showDialog.dart';
 import 'package:ilovemarajo/app/Views/HomePage/home_page.dart';
 import 'package:ilovemarajo/app/Views/InitialPage/Widgets/municipios_nome.dart';
+import 'package:mobx/mobx.dart';
 
 
 class InitialPage extends StatefulWidget {
@@ -18,7 +22,6 @@ class InitialPage extends StatefulWidget {
 }
 
 class _InitialPageState extends State<InitialPage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,8 +30,10 @@ class _InitialPageState extends State<InitialPage> {
           Container(
             decoration: BoxDecoration(
                 image: DecorationImage(
+                  colorFilter: ColorFilter.mode(Colors.blue,BlendMode.color),
                     fit: BoxFit.cover,
-                    image: AssetImage('image/fundos/login.PNG'))),
+                    image: AssetImage(
+                      'image/fundos/login.PNG'))),
           ),
           Center(
               child: AutoSizeText(
@@ -61,7 +66,7 @@ class _InitialPageState extends State<InitialPage> {
                           width: 200,
                           padding: EdgeInsets.all(15),
                           decoration: BoxDecoration(
-                              color: Colors.green,
+                              color: Colors.blue,
                               borderRadius: BorderRadius.circular(50)
                           ),
                           child: Center(

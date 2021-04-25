@@ -30,7 +30,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   
   HomeController controller = HomeController();
-  GoogleLoginController _GoogleControllerPage = GoogleLoginController();
+  GoogleLoginController _googleControllerPage = GoogleLoginController();
   SharedPreferenceController _preferenceController = SharedPreferenceController();
   FocusNode focusNode = new FocusNode();
     @override
@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
         .authStateChanges()
         .listen((user) {
           setState(() {
-           _GoogleControllerPage.setUser(user);            
+           _googleControllerPage.setUser(user);            
           });
         });
     }
@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
     }
 
   void actionButtonShow(context)async{
-    await _GoogleControllerPage.logoutGoogle();
+    await _googleControllerPage.logoutGoogle();
     _preferenceController.loginClose();
     Navigator.of(context).popAndPushNamed('/tela1');
   }
@@ -96,7 +96,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(32),
-                                child: Image.network('${_GoogleControllerPage.currentUser?.photoURL.toString()}',
+                                child: Image.network('${_googleControllerPage.currentUser?.photoURL.toString()}',
                                   fit: BoxFit.cover,
                                   height: 50,
                                   width: 50,
@@ -119,7 +119,7 @@ class _HomePageState extends State<HomePage> {
                         text: TextSpan(
                           children: <TextSpan>[
                             TextSpan(
-                              text: 'Bem vindo, ${_GoogleControllerPage.currentUser?.displayName.toString()}!!\n',
+                              text: 'Bem vindo, ${_googleControllerPage.currentUser?.displayName.toString()}!!\n',
                               style: TextStyle(
                                 fontSize: 20,
                                 color: Colors.blue

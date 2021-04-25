@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ilovemarajo/app/Util/Controller/SharedPreference/shared_preference.dart';
-import 'package:ilovemarajo/app/Views/HomePage/home_page.dart';
 import 'package:ilovemarajo/app/Views/InitialPage/initital_page.dart';
 import 'package:ilovemarajo/app/Views/LiquidPage/LiquidPage.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -35,7 +33,6 @@ class Validacao extends StatefulWidget {
 }
 
 class _ValidacaoState extends State<Validacao> {
-
   bool? validacao;
 
   Future<bool?> getPageLogin() async {
