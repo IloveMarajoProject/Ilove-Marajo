@@ -3,15 +3,10 @@ import 'dart:convert';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:connectivity/connectivity.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ilovemarajo/app/Util/Controller/Connectivity/connectivity_controller.dart';
-import 'package:ilovemarajo/app/Util/Controller/GoogleLoginController/google_controller.dart';
-import 'package:ilovemarajo/app/Util/VariaveisGlobais.dart';
-import 'package:ilovemarajo/app/Util/Widgets/showDialog.dart';
-import 'package:ilovemarajo/app/Views/HomePage/home_page.dart';
+import 'package:ilovemarajo/app/Views/InitialPage/Controller/initial_controller.dart';
+import 'package:ilovemarajo/app/Views/InitialPage/Models/municipio.dart';
 import 'package:ilovemarajo/app/Views/InitialPage/Widgets/municipios_nome.dart';
 import 'package:mobx/mobx.dart';
 
@@ -22,6 +17,15 @@ class InitialPage extends StatefulWidget {
 }
 
 class _InitialPageState extends State<InitialPage> {
+
+  InitialController controller = InitialController();
+
+  @override
+    void initState() {
+      // TODO: implement initState
+      super.initState();
+      controller.pegarDadosMunicipio();
+    }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,8 +82,8 @@ class _InitialPageState extends State<InitialPage> {
                       ),
                       Padding(
                         padding: EdgeInsets.only(top: 60),
-                        child: StreamBuilder<QuerySnapshot>(
-                          stream: FirebaseFirestore.instance.collection('Municipios').snapshots(),  
+                        child: StreamBuilder<List<MunicipioModel>>(
+                          stream: controller.dados.stream,  
                           builder: (context, snapshot) {
                                 if(snapshot.hasError){
                                   return Center(
@@ -90,18 +94,18 @@ class _InitialPageState extends State<InitialPage> {
                                     child: CircularProgressIndicator(),
                                   );
                                 }
-                                List<DocumentSnapshot>? documentos = snapshot.data?.docs.toList();
-                                if(documentos!.isEmpty){
+                                List<MunicipioModel>? dados = snapshot.data;
+                                if(dados!.isEmpty){
                                   return Center(
                                     child: Text('Sem municipios :)'),
                                   );
                                 }
                                 return ListView.builder(
-                                  itemCount: documentos.length,
+                                  itemCount: dados.length,
                                   controller: controlador,
                                   itemBuilder: (context,index){
                                     return NomesMunicipios(
-                                      documentos[index]
+                                      dados[index]
                                     );
                                   },
                                 );

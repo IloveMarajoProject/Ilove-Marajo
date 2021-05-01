@@ -1,18 +1,25 @@
 class MunicipioModel {
-  int? id;
-  String? nome;
+  int? id_municipios;
+  String? nome_municipios;
 
-  MunicipioModel({this.id, this.nome});
+  MunicipioModel({this.id_municipios, this.nome_municipios});
 
   MunicipioModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    nome = json['nome'];
+    id_municipios= json['id'];
+    nome_municipios = json['nome_municipios'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['nome'] = this.nome;
+    data['id_municipios'] = this.id_municipios;
+    data['nome_municipios'] = this.nome_municipios;
     return data;
+  }
+  static List<MunicipioModel> fromJsonList(List list) {
+    if (list == null) {
+      return null!;
+    }
+
+    return list.map((item) => MunicipioModel.fromJson(item)).toList();
   }
 }

@@ -1,3 +1,3 @@
 class UrlApiBase {
-  static String get urlBase => 'localhost:8080/';
+  static String get urlBase => 'https://ilove-marajo-node.herokuapp.com/';
 }

@@ -77,7 +77,7 @@ class _ContainerLiquidFinalState extends State<ContainerLiquidFinal> {
                       return ShowDialogGlobal(
                         titulo: 'Aviso:',
                         texto: 'Botão disponível apenas para dispositivos IOS',
-                        botaoAction: pop,
+                        botaoAction: Navigator.of(context).pop,
                         nomeBotao: 'Continuar',
                       );
                     }
@@ -91,9 +91,5 @@ class _ContainerLiquidFinalState extends State<ContainerLiquidFinal> {
         );
       }
     );
-  }
-
-  void pop(context){
-    Navigator.of(context).pop();
   }
 }

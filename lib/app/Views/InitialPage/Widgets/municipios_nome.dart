@@ -2,10 +2,11 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:ilovemarajo/app/Views/HomePage/home_page.dart';
+import 'package:ilovemarajo/app/Views/InitialPage/Models/municipio.dart';
 
 class NomesMunicipios extends StatelessWidget {
-  final DocumentSnapshot documentSnapshot;
-  NomesMunicipios(this.documentSnapshot);
+  final MunicipioModel dados;
+  NomesMunicipios(this.dados);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,7 @@ class NomesMunicipios extends StatelessWidget {
       child: GestureDetector(
         child: Center(
             child: AutoSizeText(
-                documentSnapshot['nome'],
+                dados.nome_municipios.toString(),
                 style: TextStyle(
                     fontSize: 26.0,
                     fontWeight: FontWeight.bold,
@@ -23,7 +24,7 @@ class NomesMunicipios extends StatelessWidget {
             )),
         onTap: (){
           Navigator.of(context).push(
-            MaterialPageRoute(builder: (context)=> HomePage(documentSnapshot['nome']))
+            MaterialPageRoute(builder: (context)=> HomePage(dados.nome_municipios.toString()))
           );
         },
       ),
