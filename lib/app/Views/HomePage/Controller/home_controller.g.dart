@@ -48,6 +48,21 @@ mixin _$HomeController on _HomeController, Store {
     });
   }
 
+  final _$dadosAtom = Atom(name: '_HomeController.dados');
+
+  @override
+  StreamController<List<PraiaModel>> get dados {
+    _$dadosAtom.reportRead();
+    return super.dados;
+  }
+
+  @override
+  set dados(StreamController<List<PraiaModel>> value) {
+    _$dadosAtom.reportWrite(value, super.dados, () {
+      super.dados = value;
+    });
+  }
+
   final _$validacaoAtom = Atom(name: '_HomeController.validacao');
 
   @override
@@ -61,6 +76,15 @@ mixin _$HomeController on _HomeController, Store {
     _$validacaoAtom.reportWrite(value, super.validacao, () {
       super.validacao = value;
     });
+  }
+
+  final _$pegarPraisDoMunicipiosAsyncAction =
+      AsyncAction('_HomeController.pegarPraisDoMunicipios');
+
+  @override
+  Future pegarPraisDoMunicipios(String municipio) {
+    return _$pegarPraisDoMunicipiosAsyncAction
+        .run(() => super.pegarPraisDoMunicipios(municipio));
   }
 
   final _$_HomeControllerActionController =
@@ -93,6 +117,7 @@ mixin _$HomeController on _HomeController, Store {
     return '''
 pesquisa: ${pesquisa},
 editingController: ${editingController},
+dados: ${dados},
 validacao: ${validacao},
 isButtonActivate: ${isButtonActivate}
     ''';

@@ -14,6 +14,7 @@ import 'package:ilovemarajo/app/Util/VariaveisGlobais.dart';
 import 'package:ilovemarajo/app/Util/Widgets/showDialog.dart';
 import 'package:ilovemarajo/app/Util/Widgets/showDialogTwoButtons.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Controller/home_controller.dart';
+import 'package:ilovemarajo/app/Views/HomePage/Models/praia.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Views/Drawer/drawer.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Views/InfoPage/InfoPage.dart';
 import 'package:mobx/mobx.dart';
@@ -44,10 +45,12 @@ class _HomePageState extends State<HomePage> {
            _googleControllerPage.setUser(user);            
           });
         });
+      controller.pegarPraisDoMunicipios(widget.municipio);
     }
   @override
     void dispose() {
       controller.editingController.dispose();
+      controller.dados.close();
       super.dispose();
     }
 
@@ -61,9 +64,6 @@ class _HomePageState extends State<HomePage> {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-/*        drawer: Drawer(
-         child: DrawerPage(_liquidControllerPage.currentUser),
-       ), */
        body: Builder(
          builder:(context)=> Form(
            key: controller.validacao,
@@ -77,23 +77,23 @@ class _HomePageState extends State<HomePage> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            IconButton(
-                              icon: Icon(Icons.logout),
-                              iconSize: 35,
-                              onPressed: (){
-                                showDialog(
-                                  context: context, 
-                                  builder: (context){
-                                    return ShowDialogTwoButtonGlobal(
-                                      titulo: 'Aviso:',
-                                      texto: 'Deseja mesmo sair da sua conta ?',
-                                      botaoAction: actionButtonShow,
-                                      nomeBotao: 'Continuar',
-                                    );
-                                  }
-                                );
-                              },
-                            ),
+                              IconButton(
+                                icon: Icon(Icons.logout),
+                                iconSize: 35,
+                                onPressed: (){
+                                  showDialog(
+                                    context: context, 
+                                    builder: (context){
+                                      return ShowDialogTwoButtonGlobal(
+                                        titulo: 'Aviso:',
+                                        texto: 'Deseja mesmo sair da sua conta ?',
+                                        botaoAction: actionButtonShow,
+                                        nomeBotao: 'Continuar',
+                                      );
+                                    }
+                                  );
+                                },
+                              ),
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(32),
                                 child: Image.network('${_googleControllerPage.currentUser?.photoURL.toString()}',
@@ -212,8 +212,8 @@ class _HomePageState extends State<HomePage> {
 
 
   _pegarStreamNoTabBar(String colletion){
-    return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection('Municipios').doc(widget.municipio).collection(colletion).snapshots(),
+    return StreamBuilder<List<PraiaModel>>(
+      stream: controller.dados.stream,
       builder: (context, snapshot) {
         if(snapshot.hasError){
           return Center(
@@ -226,16 +226,17 @@ class _HomePageState extends State<HomePage> {
             ),
           );
         }
-        List<DocumentSnapshot>? documentos = snapshot.data?.docs.toList();
-        if(documentos!.isEmpty){
+        List<PraiaModel>? dados = snapshot.data;
+
+        if(dados!.isEmpty){
           return Center(
             child: Text('Sem dados cadastrados :)'),
           );
         }
         return ListView.builder(
-          itemCount: documentos.length,
+          itemCount: dados.length,
           itemBuilder: (context,index){
-            return ListaWidgets(documentos[index],focusNode);
+            return ListaWidgets(dados[index],focusNode);
           },
         );
       }

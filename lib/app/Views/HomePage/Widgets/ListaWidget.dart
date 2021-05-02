@@ -1,12 +1,13 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:ilovemarajo/app/Views/HomePage/Models/praia.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Views/InfoPage/InfoPage.dart';
 
 class ListaWidgets extends StatefulWidget {
-  final DocumentSnapshot documentSnapshot;
+  final PraiaModel praiaModel;
   final FocusNode node;
-  ListaWidgets(this.documentSnapshot,this.node);
+  ListaWidgets(this.praiaModel,this.node);
   @override
   _ListaWidgetsState createState() => _ListaWidgetsState();
 }
@@ -19,7 +20,7 @@ class _ListaWidgetsState extends State<ListaWidgets> {
       onTap: (){
         widget.node.unfocus();
         Navigator.of(context).push(
-          MaterialPageRoute(builder: (context)=> InfoPage(widget.documentSnapshot))
+          MaterialPageRoute(builder: (context)=> InfoPage(widget.praiaModel))
         );
       },
       child: Container(
@@ -36,7 +37,7 @@ class _ListaWidgetsState extends State<ListaWidgets> {
           ],
           image: DecorationImage(
             fit: BoxFit.cover,
-            image: NetworkImage(widget.documentSnapshot['foto'].toString())
+            image: NetworkImage(widget.praiaModel.foto.toString())
           )
         ),
         child: Column(
@@ -46,7 +47,7 @@ class _ListaWidgetsState extends State<ListaWidgets> {
               child: Padding(
                 padding: EdgeInsets.only(left: 20,bottom: 30,top: 140),
                 child: AutoSizeText(
-                  widget.documentSnapshot['nome'].toString(),
+                  widget.praiaModel.nomePraia.toString(),
                   style: TextStyle(
                     fontSize: 25,
                     color: Colors.white,
