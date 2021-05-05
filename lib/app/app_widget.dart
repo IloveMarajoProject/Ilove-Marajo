@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ilovemarajo/app/Views/HomePage/Widgets/PageApoio/praiaPage.dart';
 import 'package:ilovemarajo/app/Views/InitialPage/initital_page.dart';
 import 'package:ilovemarajo/app/Views/LiquidPage/LiquidPage.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -10,7 +11,7 @@ class Myapp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: <String,WidgetBuilder>{
-        '/tela1': (BuildContext context) => LiquidPage()
+        '/tela1': (BuildContext context) => LiquidPage(),
       },
       debugShowCheckedModeBanner: false,
       builder: (context,widget)=>ResponsiveWrapper.builder(

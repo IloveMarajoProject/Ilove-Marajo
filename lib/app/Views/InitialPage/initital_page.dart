@@ -57,7 +57,11 @@ class _InitialPageState extends State<InitialPage> {
                   width: double.infinity,
                   decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.only(topLeft: Radius.circular(100),topRight: Radius.circular(100))),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20)
+                      )
+                    ),
                   child: Stack(
                     alignment: Alignment.topCenter,
                     children: [

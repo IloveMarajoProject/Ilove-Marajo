@@ -43,9 +43,8 @@ class AvaliacoesContainer extends StatelessWidget {
                   half: Icon(Icons.star)
                 ),
                 itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
-                onRatingUpdate: (rating) {
-                  print(rating);
-                },
+                onRatingUpdate: (_){},
+                ignoreGestures: true,
               ),
             ),
 

@@ -14,13 +14,13 @@ abstract class _HomeController with Store{
   HomeService service = HomeService();
 
   @observable
+  StreamController<List<PraiaModel>> dados = StreamController<List<PraiaModel>>();
+
+  @observable
   String pesquisa = '';
 
   @observable
   TextEditingController editingController = TextEditingController();
-
-  @observable
-  StreamController<List<PraiaModel>> dados = StreamController<List<PraiaModel>>();
 
   @observable
   GlobalKey<FormState> validacao = GlobalKey<FormState>();
