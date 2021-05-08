@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
+import 'package:ilovemarajo/app/Util/Exception/publicMessageException.dart';
 import 'package:ilovemarajo/app/Util/VariaveisGlobais.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Models/praia.dart';
 
@@ -10,11 +13,13 @@ class HomeService {
 
     try {
       Response response = await  Dio().get(UrlApiBase.urlBase + 'prais-municipio?municipios=$municipio');
-      final dados = response.data;
       return PraiaModel.fromJsonList(response.data);
       
-    } catch (e) {
-      throw e;
+    } on DioError catch (e) {
+      if (e.error is SocketException) {
+        throw new PublicMessageException('Verifique sua conexão');
+      }
+      throw PublicMessageException('Erro desconhecido');
     }
 
   }
