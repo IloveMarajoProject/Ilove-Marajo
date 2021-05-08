@@ -1,8 +1,8 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:ilovemarajo/app/Views/LiquidPage/Model/data.dart';
-import 'package:ilovemarajo/app/Views/LiquidPage/Widgets/container_Liquid.dart';
-import 'package:ilovemarajo/app/Views/LiquidPage/Widgets/container_LiquidFinal.dart';
+import 'package:ilovemarajo/app/Views/LiquidPage/Widgets/container_liquid.dart';
+import 'package:ilovemarajo/app/Views/LiquidPage/Widgets/container_liquid_final.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
 
 class LiquidPage extends StatefulWidget {

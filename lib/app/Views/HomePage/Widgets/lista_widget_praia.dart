@@ -2,17 +2,17 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Models/praia.dart';
-import 'package:ilovemarajo/app/Views/HomePage/Views/InfoPage/InfoPage.dart';
+import 'package:ilovemarajo/app/Views/HomePage/Views/InfoPage/info_page.dart';
 
-class ListaWidgets extends StatefulWidget {
+class ListaWidgetPraia extends StatefulWidget {
   final FocusNode node;
   final PraiaModel praiaModel;
-  ListaWidgets(this.praiaModel,this.node);
+  ListaWidgetPraia(this.praiaModel,this.node);
   @override
-  _ListaWidgetsState createState() => _ListaWidgetsState();
+  _ListaWidgetPraiaState createState() => _ListaWidgetPraiaState();
 }
 
-class _ListaWidgetsState extends State<ListaWidgets> {
+class _ListaWidgetPraiaState extends State<ListaWidgetPraia> {
   @override
   Widget build(BuildContext context) {
     return InkWell(

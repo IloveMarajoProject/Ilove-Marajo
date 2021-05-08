@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ilovemarajo/app/Util/Exception/publicMessageException.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Controller/home_controller.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Models/praia.dart';
-import 'package:ilovemarajo/app/Views/HomePage/Widgets/ListaWidget.dart';
+import 'package:ilovemarajo/app/Views/HomePage/Widgets/lista_widget_praia.dart';
 import 'package:ilovemarajo/app/Views/InitialPage/Models/municipio.dart';
 
 class PraiaPage extends StatefulWidget {
@@ -65,7 +65,7 @@ class _PraiaPageState extends State<PraiaPage> {
               return ListView.builder(
                 itemCount: dados.length,
                 itemBuilder: (context, index) {
-                  return ListaWidgets(dados[index], focusNode);
+                  return ListaWidgetPraia(dados[index], focusNode);
                 },
               );
             }
