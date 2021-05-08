@@ -32,8 +32,8 @@ abstract class _HomeController with Store{
   void removePesquisa()=> pesquisa = '';
 
   @action
-  pegarPraisDoMunicipios(String municipio) async {
-    List<PraiaModel> dadosPraiasMuncipio = await service.pegarPraisDoMunicipios(municipio);
+  pegarPraiasDoMunicipios(String municipio) async {
+    List<PraiaModel> dadosPraiasMuncipio = await service.pegarPraiasDoMunicipios(municipio);
     dados.add(dadosPraiasMuncipio);
   }
 

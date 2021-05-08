@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ilovemarajo/app/Util/Exception/publicMessageException.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Controller/home_controller.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Models/praia.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Widgets/ListaWidget.dart';
@@ -14,12 +15,23 @@ class PraiaPage extends StatefulWidget {
 class _PraiaPageState extends State<PraiaPage> {
   HomeController controller = HomeController();
   FocusNode focusNode = new FocusNode();
+
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    controller.pegarPraisDoMunicipios(widget.dadosMuncipio.nome_municipios.toString());
+    controller.pegarPraiasDoMunicipios(widget.dadosMuncipio.nome_municipios.toString())
+      .catchError((e){
+        return ScaffoldMessenger.of(context)
+          .showSnackBar(
+            SnackBar(
+              backgroundColor: Colors.red,
+              duration: Duration(seconds: 20),
+              content: Text(e.toString())));
+      });
   }
+
 
   @override
   Widget build(BuildContext context) {

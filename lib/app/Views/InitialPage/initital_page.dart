@@ -5,6 +5,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ilovemarajo/app/Util/Exception/publicMessageException.dart';
 import 'package:ilovemarajo/app/Views/InitialPage/Controller/initial_controller.dart';
 import 'package:ilovemarajo/app/Views/InitialPage/Models/municipio.dart';
 import 'package:ilovemarajo/app/Views/InitialPage/Widgets/municipios_nome.dart';
@@ -24,7 +25,14 @@ class _InitialPageState extends State<InitialPage> {
     void initState() {
       // TODO: implement initState
       super.initState();
-      controller.pegarDadosMunicipio();
+      controller.pegarDadosMunicipio().catchError((e){
+        return ScaffoldMessenger.of(context)
+          .showSnackBar(
+            SnackBar(
+              backgroundColor: Colors.red,
+              duration: Duration(seconds: 20),
+              content: Text(e.toString())));
+        });
     }
   @override
   Widget build(BuildContext context) {
@@ -91,7 +99,10 @@ class _InitialPageState extends State<InitialPage> {
                           builder: (context, snapshot) {
                                 if(snapshot.hasError){
                                   return Center(
-                                    child: Text('Erro inesperado :('),
+                                    child: Text(
+                                      'Error inesperado :(',
+                                      style: TextStyle(fontSize: 20),
+                                    ),
                                   );
                                 }else if(!snapshot.hasData){
                                   return Center(

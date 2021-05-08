@@ -9,7 +9,7 @@ class HomeService {
 
   HomeService();
 
-  Future<List<PraiaModel>> pegarPraisDoMunicipios(String municipio) async {
+  Future<List<PraiaModel>> pegarPraiasDoMunicipios(String municipio) async {
 
     try {
       Response response = await  Dio().get(UrlApiBase.urlBase + 'prais-municipio?municipios=$municipio');
@@ -19,7 +19,7 @@ class HomeService {
       if (e.error is SocketException) {
         throw new PublicMessageException('Verifique sua conexão');
       }
-      throw PublicMessageException('Erro desconhecido');
+      throw PublicMessageException('Erro ao carregar dados');
     }
 
   }
