@@ -24,7 +24,7 @@ class NomesMunicipios extends StatelessWidget {
             )),
         onTap: (){
           Navigator.of(context).push(
-            MaterialPageRoute(builder: (context)=> HomePage(dados.nome_municipios.toString()))
+            MaterialPageRoute(builder: (context)=> HomePage(dados))
           );
         },
       ),

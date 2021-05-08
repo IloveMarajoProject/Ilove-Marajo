@@ -5,8 +5,8 @@ import 'package:ilovemarajo/app/Views/HomePage/Models/praia.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Views/InfoPage/InfoPage.dart';
 
 class ListaWidgets extends StatefulWidget {
-  final PraiaModel praiaModel;
   final FocusNode node;
+  final PraiaModel praiaModel;
   ListaWidgets(this.praiaModel,this.node);
   @override
   _ListaWidgetsState createState() => _ListaWidgetsState();
@@ -20,11 +20,11 @@ class _ListaWidgetsState extends State<ListaWidgets> {
       onTap: (){
         widget.node.unfocus();
         Navigator.of(context).push(
-          MaterialPageRoute(builder: (context)=> InfoPage(widget.praiaModel))
+          MaterialPageRoute(builder: (_)=> InfoPage(widget.praiaModel))
         );
       },
       child: Container(
-        margin: EdgeInsets.all(20),
+        margin: EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: Colors.red,
           borderRadius: BorderRadius.circular(10),
@@ -45,7 +45,7 @@ class _ListaWidgetsState extends State<ListaWidgets> {
             Align(
               alignment: Alignment.bottomLeft,
               child: Padding(
-                padding: EdgeInsets.only(left: 20,bottom: 30,top: 140),
+                padding: EdgeInsets.only(left: 20,bottom: 20,top: 140),
                 child: AutoSizeText(
                   widget.praiaModel.nomePraia.toString(),
                   style: TextStyle(
