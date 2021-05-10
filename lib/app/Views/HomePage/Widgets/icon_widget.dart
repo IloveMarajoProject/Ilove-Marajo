@@ -5,7 +5,7 @@ class IconWidgetPontos extends StatelessWidget {
   final IconData icone;
   final Color? iconeColor;
   final Color? containerColor;
-  final VoidCallback? ontap;
+  final VoidCallback ontap;
 
   IconWidgetPontos(
     {
@@ -13,13 +13,13 @@ class IconWidgetPontos extends StatelessWidget {
       required this.icone, 
       required this.containerColor, 
       required this.iconeColor,
-      this.ontap
+      required this.ontap
       }
   );
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: ()=> this.ontap!(),
+      onTap: ()=> this.ontap(),
       child: Column(
         children: [
           Container(

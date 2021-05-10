@@ -25,7 +25,7 @@ class _ListaWidgetPraiaState extends State<ListaWidgetPraia> {
         margin: EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: Colors.blue,
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(8),
           boxShadow: [
             BoxShadow(
               color: Colors.grey,
@@ -35,50 +35,55 @@ class _ListaWidgetPraiaState extends State<ListaWidgetPraia> {
           ],
           image: DecorationImage(
             fit: BoxFit.cover,
-            image: NetworkImage(widget.praiaModel.foto.toString())
-          )
+            image: NetworkImage(
+              widget.praiaModel.foto.toString()))
         ),
-        child: Column(
-          children: [
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            color: Colors.black.withOpacity(0.3),
+          ),
+          child: Column(
+            children: [
+              Align(
+                alignment: Alignment.topRight,
+                child: Container(
+                  margin: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: Colors.white24,
+                    borderRadius: BorderRadius.circular(10)
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text('4,5',
+                          style: TextStyle(fontSize: 20,color: Colors.white)
+                        ),
+                        Icon(Icons.star,color: Colors.white,)
+                      ],
+                    ),
+                  ),
+                )
+              ),
 
-            Align(
-              alignment: Alignment.topRight,
-              child: Container(
-                margin: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: Colors.white70,
-                  borderRadius: BorderRadius.circular(10)
-                ),
+              Align(
+                alignment: Alignment.bottomLeft,
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text('4,5',
-                        style: TextStyle(fontSize: 20)
-                      ),
-                      Icon(Icons.star)
-                    ],
+                  padding: EdgeInsets.only(left: 20,bottom: 20,top: 110),
+                  child: AutoSizeText(
+                    widget.praiaModel.nomePraia.toString(),
+                    style: TextStyle(
+                      fontSize: 25,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold
+                    ),
                   ),
                 ),
               )
-            ),
-
-            Align(
-              alignment: Alignment.bottomLeft,
-              child: Padding(
-                padding: EdgeInsets.only(left: 20,bottom: 20,top: 110),
-                child: AutoSizeText(
-                  widget.praiaModel.nomePraia.toString(),
-                  style: TextStyle(
-                    fontSize: 25,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold
-                  ),
-                ),
-              ),
-            )
-          ],
+            ],
+          ),
         ),
       ),
     );
