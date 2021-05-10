@@ -1,9 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Models/praia.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Views/InfoPage/info_page.dart';
-
 class ListaWidgetPraia extends StatefulWidget {
   final FocusNode node;
   final PraiaModel praiaModel;
@@ -26,7 +24,7 @@ class _ListaWidgetPraiaState extends State<ListaWidgetPraia> {
       child: Container(
         margin: EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: Colors.red,
+          color: Colors.blue,
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
@@ -42,10 +40,34 @@ class _ListaWidgetPraiaState extends State<ListaWidgetPraia> {
         ),
         child: Column(
           children: [
+
+            Align(
+              alignment: Alignment.topRight,
+              child: Container(
+                margin: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.white70,
+                  borderRadius: BorderRadius.circular(10)
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text('4,5',
+                        style: TextStyle(fontSize: 20)
+                      ),
+                      Icon(Icons.star)
+                    ],
+                  ),
+                ),
+              )
+            ),
+
             Align(
               alignment: Alignment.bottomLeft,
               child: Padding(
-                padding: EdgeInsets.only(left: 20,bottom: 20,top: 140),
+                padding: EdgeInsets.only(left: 20,bottom: 20,top: 110),
                 child: AutoSizeText(
                   widget.praiaModel.nomePraia.toString(),
                   style: TextStyle(
