@@ -14,9 +14,6 @@ class PraiaPage extends StatefulWidget {
 
 class _PraiaPageState extends State<PraiaPage> {
   HomeController controller = HomeController();
-  FocusNode focusNode = new FocusNode();
-
-
   @override
   void initState() {
     // TODO: implement initState
@@ -65,7 +62,7 @@ class _PraiaPageState extends State<PraiaPage> {
               return ListView.builder(
                 itemCount: dados.length,
                 itemBuilder: (context, index) {
-                  return ListaWidgetPraia(dados[index], focusNode);
+                  return ListaWidgetPraia(dados[index]);
                 },
               );
             }

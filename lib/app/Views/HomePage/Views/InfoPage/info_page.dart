@@ -8,6 +8,7 @@ import 'package:ilovemarajo/app/Views/HomePage/Models/praia.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Views/InfoPage/Controller/info_controller.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Views/InfoPage/Views/Avaliacoes/avaliacoes_page.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Views/InfoPage/Widgets/avaliacoes.dart';
+import 'package:ilovemarajo/app/Views/HomePage/Views/InfoPage/Widgets/bottom_nav_bar.dart';
 import 'package:map_launcher/map_launcher.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 class InfoPage extends StatefulWidget {
@@ -19,8 +20,6 @@ class InfoPage extends StatefulWidget {
 }
 
 class _InfoPageState extends State<InfoPage> {
-
-  InfoController controller = InfoController();
 
   @override
   Widget build(BuildContext context) {
@@ -57,29 +56,6 @@ class _InfoPageState extends State<InfoPage> {
                           Navigator.of(context).pop();
                         }
                       ),
-                      Observer(
-                        builder: (_) {
-                          return IconButton(
-                            color: controller.isButtonFavorite? 
-                              Colors.yellow
-                              :
-                              Colors.white
-                            ,
-                            icon: controller.isButtonFavorite?
-                              Icon(Icons.star)
-                              :
-                              Icon(Icons.star_border)
-                            ,
-                            iconSize: 35,
-                            onPressed: (){
-                              controller.isButtonFavorite?
-                                controller.removeBotao()
-                                :
-                                controller.enableBotao();
-                            }
-                          );
-                        }
-                      )
                     ],
                   ),
 
@@ -89,27 +65,16 @@ class _InfoPageState extends State<InfoPage> {
                     left: 0,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Expanded(
-                            child: AutoSizeText(
-                              widget.praiaModel.nomePraia.toString(),
-                              maxLines: 1,
-                              style: TextStyle(
-                                fontSize: 35,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white
-                              ),
-                            ),
+                      child: Expanded(
+                        child: AutoSizeText(
+                          widget.praiaModel.nomePraia.toString(),
+                          maxLines: 1,
+                          style: TextStyle(
+                            fontSize: 35,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white
                           ),
-                          ElevatedButton.icon(
-                            onPressed: (){
-                              openMapsSheet(context);
-                            },
-                            icon: Icon(Icons.location_on),
-                            label: Text('Ir ao local')),
-                        ],
+                        ),
                       ),
                     ),
                   ),
@@ -202,52 +167,11 @@ class _InfoPageState extends State<InfoPage> {
           ),
         ),
       ),
+
+      bottomNavigationBar: BottomNavBarWidget(
+        praiaModel: widget.praiaModel,
+      )
     );
   }
 
-
-
-
-
-  //Metodo que abre o mapa
-  openMapsSheet(context) async {
-    try {
-      final coords = Coords(
-        double.parse(widget.praiaModel.lat.toString()), 
-        double.parse(widget.praiaModel.long.toString()));
-      final title = "Local";
-      final availableMaps = await MapLauncher.installedMaps;
-
-      showModalBottomSheet(
-        context: context,
-        builder: (BuildContext context) {
-          return SafeArea(
-            child: SingleChildScrollView(
-              child: Container(
-                child: Wrap(
-                  children: <Widget>[
-                    for (var map in availableMaps)
-                      ListTile(
-                       onTap: () => map.showMarker(
-                         coords: coords,
-                         title: title,
-                        ),
-                        title: Text(map.mapName),
-                        leading: SvgPicture.asset(
-                          map.icon,
-                          height: 30.0,
-                          width: 30.0,
-                        ),
-                      ),
-                  ],
-                ),
-              ),
-            ),
-          );
-        },
-      );
-    } catch (e) {
-      print(e);
-    }
-  }
 }

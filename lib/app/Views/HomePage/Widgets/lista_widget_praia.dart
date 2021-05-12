@@ -2,23 +2,18 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Models/praia.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Views/InfoPage/info_page.dart';
-class ListaWidgetPraia extends StatefulWidget {
-  final FocusNode node;
-  final PraiaModel praiaModel;
-  ListaWidgetPraia(this.praiaModel,this.node);
-  @override
-  _ListaWidgetPraiaState createState() => _ListaWidgetPraiaState();
-}
 
-class _ListaWidgetPraiaState extends State<ListaWidgetPraia> {
+class ListaWidgetPraia extends StatelessWidget{
+  final PraiaModel praiaModel;
+  ListaWidgetPraia(this.praiaModel);
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
       splashColor: Colors.blue,
       onTap: (){
-        widget.node.unfocus();
         Navigator.of(context).push(
-          MaterialPageRoute(builder: (_)=> InfoPage(widget.praiaModel))
+          MaterialPageRoute(builder: (_)=> InfoPage(praiaModel))
         );
       },
       child: Container(
@@ -36,7 +31,7 @@ class _ListaWidgetPraiaState extends State<ListaWidgetPraia> {
           image: DecorationImage(
             fit: BoxFit.cover,
             image: NetworkImage(
-              widget.praiaModel.foto.toString()))
+              praiaModel.foto.toString()))
         ),
         child: Container(
           decoration: BoxDecoration(
@@ -73,7 +68,7 @@ class _ListaWidgetPraiaState extends State<ListaWidgetPraia> {
                 child: Padding(
                   padding: EdgeInsets.only(left: 20,bottom: 20,top: 110),
                   child: AutoSizeText(
-                    widget.praiaModel.nomePraia.toString(),
+                    praiaModel.nomePraia.toString(),
                     style: TextStyle(
                       fontSize: 25,
                       color: Colors.white,
