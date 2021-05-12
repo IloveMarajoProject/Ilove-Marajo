@@ -45,18 +45,20 @@ class _InfoPageState extends State<InfoPage> {
                       )
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      IconButton(
-                        color: Colors.white,
-                        icon: Icon(Icons.keyboard_arrow_left),
-                        iconSize: 35,
-                        onPressed: (){
-                          Navigator.of(context).pop();
-                        }
-                      ),
-                    ],
+                  Container(
+                    margin: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(32)
+                    ),
+                    child: IconButton(
+                      color: Colors.black,
+                      icon: Icon(Icons.keyboard_arrow_left),
+                      iconSize: 35,
+                      onPressed: (){
+                        Navigator.of(context).pop();
+                      }
+                    ),
                   ),
 
                   Positioned(

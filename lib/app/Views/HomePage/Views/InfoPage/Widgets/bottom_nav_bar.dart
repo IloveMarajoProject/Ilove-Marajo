@@ -21,7 +21,7 @@ class BottomNavBarWidget extends StatelessWidget {
               height: 50,
               width: 50,
               decoration: BoxDecoration(
-                color: Colors.blueAccent,
+                color: Colors.lightBlueAccent,
                 borderRadius: BorderRadius.circular(10)
               ),
               child: Center(
@@ -29,7 +29,7 @@ class BottomNavBarWidget extends StatelessWidget {
                   builder: (_) {
                     return IconButton(
                       color: controller.isButtonFavorite? 
-                        Colors.yellow
+                        Colors.yellowAccent
                         :
                         Colors.white
                       ,

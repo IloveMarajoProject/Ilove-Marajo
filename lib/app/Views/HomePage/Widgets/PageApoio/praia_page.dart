@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ilovemarajo/app/Util/Exception/publicMessageException.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Controller/home_controller.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Models/praia.dart';
-import 'package:ilovemarajo/app/Views/HomePage/Widgets/lista_widget_praia.dart';
+import 'file:///C:/Users/andre/Desktop/ANL/GitHub/PROJETOS-IMPORTANTES/Ilove-Marajo/lib/app/Views/HomePage/Widgets/PageApoio/Widgets/lista_widget_praia.dart';
 import 'package:ilovemarajo/app/Views/InitialPage/Models/municipio.dart';
 
 class PraiaPage extends StatefulWidget {
