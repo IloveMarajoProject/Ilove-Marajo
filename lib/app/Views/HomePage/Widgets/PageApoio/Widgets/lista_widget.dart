@@ -3,19 +3,34 @@ import 'package:flutter/material.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Models/praia.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Views/InfoPage/info_page.dart';
 
-class ListaWidgetPraia extends StatelessWidget{
-  final PraiaModel praiaModel;
-  ListaWidgetPraia(this.praiaModel);
+class ListaWidget extends StatelessWidget{
+  final PraiaModel? praiaModel;
+  final VoidCallback onTapNavigator;
+  ListaWidget({this.praiaModel, required this.onTapNavigator});
+
+  String get nomeLocal {
+    if(praiaModel != null){
+      return praiaModel!.nomePraia.toString();
+    }
+    return 'Erro';
+  }
+
+  String get fotoLocal {
+    if(praiaModel != null){
+      return praiaModel!.foto.toString();
+    }
+    return 'Erro';
+  }
+
+  String get estrelasLocal {
+    return '4.5';
+  }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       splashColor: Colors.blue,
-      onTap: (){
-        Navigator.of(context).push(
-          MaterialPageRoute(builder: (_)=> InfoPage(praiaModel))
-        );
-      },
+      onTap: () => this.onTapNavigator(),
       child: Container(
         margin: EdgeInsets.all(10),
         decoration: BoxDecoration(
@@ -31,7 +46,9 @@ class ListaWidgetPraia extends StatelessWidget{
           image: DecorationImage(
             fit: BoxFit.cover,
             image: NetworkImage(
-              praiaModel.foto.toString()))
+              fotoLocal
+            )
+          )
         ),
         child: Container(
           decoration: BoxDecoration(
@@ -53,7 +70,7 @@ class ListaWidgetPraia extends StatelessWidget{
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text('4,5',
+                        Text(estrelasLocal,
                           style: TextStyle(fontSize: 20,color: Colors.white)
                         ),
                         Icon(Icons.star,color: Colors.white,)
@@ -68,7 +85,7 @@ class ListaWidgetPraia extends StatelessWidget{
                 child: Padding(
                   padding: EdgeInsets.only(left: 20,bottom: 20,top: 110),
                   child: AutoSizeText(
-                    praiaModel.nomePraia.toString(),
+                    nomeLocal,
                     style: TextStyle(
                       fontSize: 25,
                       color: Colors.white,

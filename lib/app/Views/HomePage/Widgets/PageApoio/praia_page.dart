@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:ilovemarajo/app/Util/Exception/publicMessageException.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Controller/home_controller.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Models/praia.dart';
-import 'file:///C:/Users/andre/Desktop/ANL/GitHub/PROJETOS-IMPORTANTES/Ilove-Marajo/lib/app/Views/HomePage/Widgets/PageApoio/Widgets/lista_widget_praia.dart';
+import 'package:ilovemarajo/app/Views/HomePage/Views/InfoPage/info_page.dart';
 import 'package:ilovemarajo/app/Views/InitialPage/Models/municipio.dart';
+
+import 'Widgets/lista_widget.dart';
 
 class PraiaPage extends StatefulWidget {
   final MunicipioModel dadosMuncipio;
@@ -62,7 +64,14 @@ class _PraiaPageState extends State<PraiaPage> {
               return ListView.builder(
                 itemCount: dados.length,
                 itemBuilder: (context, index) {
-                  return ListaWidgetPraia(dados[index]);
+                  return ListaWidget(
+                    praiaModel: dados[index],
+                    onTapNavigator: (){
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (_) => InfoPage(dados[index]))
+                      );
+                    },
+                  );
                 },
               );
             }
