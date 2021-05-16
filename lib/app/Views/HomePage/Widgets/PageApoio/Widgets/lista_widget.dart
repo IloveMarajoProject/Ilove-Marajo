@@ -2,25 +2,35 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Models/praia.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Views/InfoPage/info_page.dart';
-class ListaWidgetPraia extends StatefulWidget {
-  final FocusNode node;
-  final PraiaModel praiaModel;
-  ListaWidgetPraia(this.praiaModel,this.node);
-  @override
-  _ListaWidgetPraiaState createState() => _ListaWidgetPraiaState();
-}
 
-class _ListaWidgetPraiaState extends State<ListaWidgetPraia> {
+class ListaWidget extends StatelessWidget{
+  final PraiaModel? praiaModel;
+  final VoidCallback onTapNavigator;
+  ListaWidget({this.praiaModel, required this.onTapNavigator});
+
+  String get nomeLocal {
+    if(praiaModel != null){
+      return praiaModel!.nomePraia.toString();
+    }
+    return 'Erro';
+  }
+
+  String get fotoLocal {
+    if(praiaModel != null){
+      return praiaModel!.foto.toString();
+    }
+    return 'Erro';
+  }
+
+  String get estrelasLocal {
+    return '4.5';
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
       splashColor: Colors.blue,
-      onTap: (){
-        widget.node.unfocus();
-        Navigator.of(context).push(
-          MaterialPageRoute(builder: (_)=> InfoPage(widget.praiaModel))
-        );
-      },
+      onTap: () => this.onTapNavigator(),
       child: Container(
         margin: EdgeInsets.all(10),
         decoration: BoxDecoration(
@@ -36,7 +46,9 @@ class _ListaWidgetPraiaState extends State<ListaWidgetPraia> {
           image: DecorationImage(
             fit: BoxFit.cover,
             image: NetworkImage(
-              widget.praiaModel.foto.toString()))
+              fotoLocal
+            )
+          )
         ),
         child: Container(
           decoration: BoxDecoration(
@@ -58,7 +70,7 @@ class _ListaWidgetPraiaState extends State<ListaWidgetPraia> {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text('4,5',
+                        Text(estrelasLocal,
                           style: TextStyle(fontSize: 20,color: Colors.white)
                         ),
                         Icon(Icons.star,color: Colors.white,)
@@ -73,7 +85,7 @@ class _ListaWidgetPraiaState extends State<ListaWidgetPraia> {
                 child: Padding(
                   padding: EdgeInsets.only(left: 20,bottom: 20,top: 110),
                   child: AutoSizeText(
-                    widget.praiaModel.nomePraia.toString(),
+                    nomeLocal,
                     style: TextStyle(
                       fontSize: 25,
                       color: Colors.white,

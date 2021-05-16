@@ -24,7 +24,6 @@ import 'package:ilovemarajo/app/Views/HomePage/Widgets/lista_widget_popular.dart
 import 'package:ilovemarajo/app/Views/InitialPage/Models/municipio.dart';
 import 'package:mobx/mobx.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'Widgets/lista_widget_praia.dart';
 
 class HomePage extends StatefulWidget {
   final MunicipioModel dadosMuncipio;
