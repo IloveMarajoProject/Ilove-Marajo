@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Models/praia.dart';
+import 'package:ilovemarajo/app/Views/HomePage/Views/InfoPage/Widgets/card_avaliacao.dart';
 
 class TabBarData {
   final PraiaModel? praiaModel;
@@ -33,10 +34,12 @@ class TabBarData {
           ),
         ],
       ),
-      Container(
-        child: Center(
-          child: Text('Display Tab 2', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-        ),
+      ListView(
+        children: [
+          CardAvaliacao(),
+          CardAvaliacao(),
+          CardAvaliacao(),
+        ],
       ),
       Container(
         child: Center(

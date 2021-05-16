@@ -31,7 +31,7 @@ class _InfoPageState extends State<InfoPage> with SingleTickerProviderStateMixin
             Stack(
               children: [
                 Container(
-                  height: MediaQuery.of(context).size.height * .5,
+                  height: MediaQuery.of(context).size.height * .46,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(22),
@@ -115,7 +115,7 @@ class _InfoPageState extends State<InfoPage> with SingleTickerProviderStateMixin
 
       bottomNavigationBar: BottomNavBarWidget(
         praiaModel: widget.praiaModel,
-      )
+      ),
     );
   }
 

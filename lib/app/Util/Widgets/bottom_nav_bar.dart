@@ -77,7 +77,30 @@ class BottomNavBarWidget extends StatelessWidget {
                   ),
                 ),
               )
-            )
+            ),
+            SizedBox(width: 20),
+            Expanded(
+              child: InkWell(
+                onTap: (){},
+                child: Container(
+                  height: 50,
+                  width: 50,
+                  decoration: BoxDecoration(
+                    color: Colors.green,
+                    borderRadius: BorderRadius.circular(10)
+                  ),
+                  child: Center(
+                    child: Text(
+                      'Avaliar',
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white
+                      ),
+                    )
+                  ),
+                ),
+              )
+            ),
           ],
         ),
       );
