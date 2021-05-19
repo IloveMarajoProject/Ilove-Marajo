@@ -6,15 +6,12 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:ilovemarajo/app/Util/Controller/GoogleLoginController/google_controller.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Views/InfoPage/Views/Avaliacoes/Controller/avaliacao_controller.dart';
 
-class Avaliacao extends StatefulWidget {
-  final DocumentSnapshot documentSnapshot;
-
-  Avaliacao(this.documentSnapshot);
+class AvaliacaoPage extends StatefulWidget {
   @override
-  _AvaliacaoState createState() => _AvaliacaoState();
+  _AvaliacaoPageState createState() => _AvaliacaoPageState();
 }
 
-class _AvaliacaoState extends State<Avaliacao> {
+class _AvaliacaoPageState extends State<AvaliacaoPage> {
   FocusNode focusNode = new FocusNode();
   AvaliacaoController _controller = AvaliacaoController();
   GoogleLoginController _GoogleControllerPage = GoogleLoginController();
@@ -155,14 +152,5 @@ class _AvaliacaoState extends State<Avaliacao> {
     );
   }
 
-  Future enviarAvaliacao({String? texto,double? star}) async {
-    Map<String, dynamic> data = {
-      "uid" : _GoogleControllerPage.currentUser!.uid.toString(),
-      "star": star,
-      "nome": _GoogleControllerPage.currentUser!.displayName.toString(),
-      "texto": texto,
-      "Time": FieldValue.serverTimestamp()
-    };
-    return await FirebaseFirestore.instance.collection('Avaliacoes').doc(widget.documentSnapshot['nome']).collection('notas').add(data);
-  } 
+  Future enviarAvaliacao({String? texto,double? star}) async { } 
 }

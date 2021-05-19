@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:ilovemarajo/app/Util/Widgets/bottom_nav_bar.dart';
+import 'package:ilovemarajo/app/Views/HomePage/Views/InfoPage/Widgets/bottom_nav_bar.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Models/praia.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Views/InfoPage/Core/data.dart';
 class InfoPage extends StatefulWidget {
