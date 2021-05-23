@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Views/InfoPage/Widgets/bottom_nav_bar.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Models/praia.dart';
-import 'package:ilovemarajo/app/Views/HomePage/Views/InfoPage/Core/data.dart';
+import 'package:ilovemarajo/app/Views/HomePage/Views/InfoPage/Widgets/card_avaliacao.dart';
 class InfoPage extends StatefulWidget {
   final PraiaModel praiaModel;
   InfoPage(this.praiaModel);
@@ -11,14 +11,51 @@ class InfoPage extends StatefulWidget {
 }
 
 class _InfoPageState extends State<InfoPage> with SingleTickerProviderStateMixin {
-  
-  TabBarData? _tabBarData;
 
-  @override
-    void initState() {
-      super.initState();
-      _tabBarData = TabBarData(praiaModel: widget.praiaModel);
+
+  String get descricao {
+    if (widget.praiaModel != null){
+      return widget.praiaModel.descricao!;
     }
+
+    return 'Erro na descrição';
+  }
+
+  List<Widget> listaTabBar = [
+    Tab(text: 'Descrição'),
+    Tab(text: 'Avaliações'),
+    Tab(text: 'Fotos'),
+  ];
+
+  List<Widget> listaConteudoTabBar () {
+    return [
+     ListView(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Text(
+              descricao,
+              style: TextStyle(
+                fontSize: 18
+              ),
+            ),
+          ),
+        ],
+      ),
+      ListView(
+        children: [
+          CardAvaliacao(),
+          CardAvaliacao(),
+          CardAvaliacao(),
+        ],
+      ),
+      Container(
+        child: Center(
+          child: Text('Display Tab 3', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+        ),
+      ),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +121,7 @@ class _InfoPageState extends State<InfoPage> with SingleTickerProviderStateMixin
 
 
             DefaultTabController(
-              length: 3,
+              length: listaTabBar.length,
               initialIndex: 0, 
               child: Expanded(
                 flex: 1,
@@ -95,12 +132,12 @@ class _InfoPageState extends State<InfoPage> with SingleTickerProviderStateMixin
                       child: TabBar(
                         labelColor: Colors.green,
                         unselectedLabelColor: Colors.black,
-                        tabs: _tabBarData!.listTabBar()
+                        tabs: listaTabBar
                       ),
                     ),
                     Flexible(
                       child: TabBarView(
-                        children: _tabBarData!.listaConteudoTabBar()
+                        children: listaConteudoTabBar()
                       ),
                     )
             

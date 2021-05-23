@@ -3,7 +3,7 @@ import 'package:ilovemarajo/app/Util/Exception/publicMessageException.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Controller/home_controller.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Models/praia.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Views/InfoPage/info_page.dart';
-import 'package:ilovemarajo/app/Views/HomePage/Widgets/PageApoio/Widgets/app_bar.dart';
+import 'package:ilovemarajo/app/Views/HomePage/Widgets/Template/Widgets/app_bar.dart';
 import 'package:ilovemarajo/app/Views/InitialPage/Models/municipio.dart';
 
 import 'Widgets/lista_widget.dart';
@@ -36,12 +36,9 @@ class _PraiaPageState extends State<PraiaPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(60),
-          child: AppBarWidget(
-            text: 'Praias',
-            colorBar: Colors.blueAccent,
-          ),
+        appBar: AppBarWidget(
+          text: 'Praias',
+          colorBar: Colors.blueAccent,
         ),
         body: StreamBuilder<List<PraiaModel>>(
             stream: controller.dados.stream,

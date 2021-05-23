@@ -16,10 +16,9 @@ class MunicipioModel {
     return data;
   }
   static List<MunicipioModel> fromJsonList(List list) {
-    if (list == null) {
+    if(list == null){
       return null!;
     }
-
-    return list.map((item) => MunicipioModel.fromJson(item)).toList();
+    return list.map((e) => MunicipioModel.fromJson(e)).toList();
   }
 }

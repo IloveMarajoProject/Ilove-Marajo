@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ilovemarajo/app/Views/HomePage/Widgets/PageApoio/praia_page.dart';
+import 'package:ilovemarajo/app/Views/HomePage/Widgets/Template/praia_page.dart';
 import 'package:ilovemarajo/app/Views/InitialPage/initital_page.dart';
 import 'package:ilovemarajo/app/Views/LiquidPage/liquid_page.dart';
 import 'package:responsive_framework/responsive_framework.dart';

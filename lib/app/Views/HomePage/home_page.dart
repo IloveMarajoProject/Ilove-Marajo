@@ -18,7 +18,7 @@ import 'package:ilovemarajo/app/Views/HomePage/Controller/home_controller.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Models/praia.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Views/Drawer/drawer.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Views/InfoPage/info_page.dart';
-import 'package:ilovemarajo/app/Views/HomePage/Widgets/PageApoio/praia_page.dart';
+import 'package:ilovemarajo/app/Views/HomePage/Widgets/Template/praia_page.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Widgets/icon_widget.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Widgets/lista_widget_popular.dart';
 import 'package:ilovemarajo/app/Views/InitialPage/Models/municipio.dart';
