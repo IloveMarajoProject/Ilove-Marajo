@@ -12,7 +12,7 @@ class HomeService {
   Future<List<PraiaModel>> pegarPraiasDoMunicipios(String municipio) async {
 
     try {
-      Response response = await  Dio().get(UrlApiBase.urlBase + 'prais-municipio?municipios=$municipio');
+      Response response = await  Dio().get(UrlApiBase.urlBase + 'praias-municipio?municipio=$municipio');
       return PraiaModel.fromJsonList(response.data);
       
     } on DioError catch (e) {

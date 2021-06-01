@@ -24,6 +24,10 @@ class ListaWidget extends StatelessWidget{
   }
 
   String get estrelasLocal {
+
+    if(praiaModel != null){
+      return praiaModel!.avaliacao.toString();
+    }
     return '4.5';
   }
 
@@ -34,7 +38,10 @@ class ListaWidget extends StatelessWidget{
       onTap: () => this.onTapNavigator(),
       child: CachedNetworkImage(
         imageUrl: fotoLocal,
-        placeholder: (context, url) => CircularProgressIndicator(backgroundColor: Colors.red),
+        placeholder: (context, url) => Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(child: CircularProgressIndicator(backgroundColor: Colors.red)),
+        ),
         imageBuilder:(context, imageProvider) => Container(
           margin: EdgeInsets.all(10),
           decoration: BoxDecoration(

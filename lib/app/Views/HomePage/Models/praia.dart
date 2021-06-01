@@ -1,48 +1,54 @@
+import 'dart:convert';
+
 class PraiaModel {
-  String? nomeMunicipios;
+  int? idPraia;
   String? nomePraia;
   String? descricao;
   String? foto;
-  double? avaliacao;
   String? lat;
-  String? long;
+  String? lon;
+  double? avaliacao;
+  String? municipio;
 
   PraiaModel(
-      {this.nomeMunicipios,
+      {this.idPraia,
       this.nomePraia,
       this.descricao,
       this.foto,
-      this.avaliacao,
       this.lat,
-      this.long});
+      this.lon,
+      this.avaliacao,
+      this.municipio});
 
   PraiaModel.fromJson(Map<String, dynamic> json) {
-    nomeMunicipios = json['nome_municipios'];
+    idPraia = json['id_praia'];
     nomePraia = json['nome_praia'];
     descricao = json['descricao'];
     foto = json['foto'];
-    avaliacao = json['avaliacao'] is int ? (json['avaliacao'] as int).toDouble() : json['avaliacao'];
     lat = json['lat'];
-    long = json['long'];
+    lon = json['lon'];
+    avaliacao = json['avaliacao'] is int ? (json['avaliacao'] as int).toDouble() : json['avaliacao'];
+    municipio = json['municipio'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['nome_municipios'] = this.nomeMunicipios;
+    data['id_praia'] = this.idPraia;
     data['nome_praia'] = this.nomePraia;
     data['descricao'] = this.descricao;
     data['foto'] = this.foto;
-    data['avaliacao'] = this.avaliacao;
     data['lat'] = this.lat;
-    data['long'] = this.long;
+    data['lon'] = this.lon;
+    data['avaliacao'] = this.avaliacao;
+    data['municipio'] = this.municipio;
     return data;
   }
 
-  static List<PraiaModel> fromJsonList (List list){
-    if(list == null){
+  static List<PraiaModel> fromJsonList (List lista){
+    if (lista == null) {
       return null!;
     }
-
-    return list.map((e) => PraiaModel.fromJson(e)).toList();
+    return lista.map((e) => PraiaModel.fromJson(e)).toList();
   }
+
 }

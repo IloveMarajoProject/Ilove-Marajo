@@ -56,7 +56,6 @@ class _InfoPageState extends State<InfoPage> with SingleTickerProviderStateMixin
       ),
     ];
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

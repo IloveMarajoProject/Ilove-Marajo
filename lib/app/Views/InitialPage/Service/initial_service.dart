@@ -15,6 +15,7 @@ class InitialService {
     try {
 
       Response response = await  Dio().get(UrlApiBase.urlBase + 'municipios');
+      print(response.data);
       return MunicipioModel.fromJsonList(response.data);
 
     } on DioError catch (e) {

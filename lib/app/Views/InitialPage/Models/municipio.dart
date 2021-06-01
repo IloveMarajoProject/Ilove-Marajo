@@ -5,8 +5,8 @@ class MunicipioModel {
   MunicipioModel({this.id_municipios, this.nome_municipios});
 
   MunicipioModel.fromJson(Map<String, dynamic> json) {
-    id_municipios= json['id'];
-    nome_municipios = json['nome_municipios'];
+    id_municipios= json['id_municipio'];
+    nome_municipios = json['nome_municipio'];
   }
 
   Map<String, dynamic> toJson() {

@@ -8,10 +8,33 @@ import 'package:ilovemarajo/app/Views/HomePage/Views/InfoPage/Views/Avaliacoes/a
 import 'package:map_launcher/map_launcher.dart';
 
 class BottomNavBarWidget extends StatelessWidget {
-  final PraiaModel praiaModel;
-
-  BottomNavBarWidget({required this.praiaModel});
+  final PraiaModel? praiaModel;
+  BottomNavBarWidget({
+    this.praiaModel
+    });
   InfoController controller = InfoController();
+
+  double get latitude {
+    if (praiaModel != null){
+      return double.parse(praiaModel!.lat.toString());
+    }
+    return 30.0;
+  }
+
+  double get longitude {
+    if (praiaModel != null){
+      return double.parse(praiaModel!.lon.toString());
+    }
+    return 30.0;   
+  }
+
+  int? get idLocal {
+    if (praiaModel != null){
+      return praiaModel!.idPraia;
+    }
+    return 1;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -87,7 +110,9 @@ class BottomNavBarWidget extends StatelessWidget {
                   showCupertinoDialog(
                     context: context,
                     builder: (_){
-                      return AvaliacaoPage();
+                      return AvaliacaoPage(
+                        idLocal: idLocal,
+                      );
                     }
                   );
                 },
@@ -118,8 +143,8 @@ class BottomNavBarWidget extends StatelessWidget {
   openMapsSheet(context) async {
     try {
       final coords = Coords(
-        double.parse(praiaModel.lat.toString()), 
-        double.parse(praiaModel.long.toString()));
+        latitude, 
+        longitude);
       final title = "Local";
       final availableMaps = await MapLauncher.installedMaps;
 
