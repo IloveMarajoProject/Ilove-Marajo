@@ -78,6 +78,15 @@ mixin _$AvaliacaoController on _AvaliacaoController, Store {
     });
   }
 
+  final _$enviarAvaliacaoAsyncAction =
+      AsyncAction('_AvaliacaoController.enviarAvaliacao');
+
+  @override
+  Future enviarAvaliacao({double? nota, String? comentario, int? idLocal}) {
+    return _$enviarAvaliacaoAsyncAction.run(() => super
+        .enviarAvaliacao(nota: nota, comentario: comentario, idLocal: idLocal));
+  }
+
   final _$_AvaliacaoControllerActionController =
       ActionController(name: '_AvaliacaoController');
 

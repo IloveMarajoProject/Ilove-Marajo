@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ilovemarajo/app/Views/HomePage/Views/InfoPage/Views/Avaliacoes/service/avaliacao_service.dart';
 import 'package:mobx/mobx.dart';
 part 'avaliacao_controller.g.dart';
 
@@ -6,6 +7,8 @@ class AvaliacaoController = _AvaliacaoController with _$AvaliacaoController;
 
 abstract class _AvaliacaoController with Store {
   
+  AvaliacaoService avaliacaoService = AvaliacaoService();
+
   @observable
   String pesquisa = '';
 
@@ -26,6 +29,15 @@ abstract class _AvaliacaoController with Store {
 
   @action
   void removeAvaliacao()=> pesquisa = '';
+
+  @action
+  enviarAvaliacao({double? nota, String? comentario, int? idLocal}) async {
+    await avaliacaoService.enviarAvaliacao(
+      comentario: comentario,
+      idLocal: idLocal,
+      nota: nota
+    );
+  }
 
   @computed
   bool get isButtonActivate => pesquisa.length > 3 && estrelas > 0.0;
