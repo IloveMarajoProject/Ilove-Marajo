@@ -82,9 +82,10 @@ mixin _$AvaliacaoController on _AvaliacaoController, Store {
       AsyncAction('_AvaliacaoController.enviarAvaliacao');
 
   @override
-  Future enviarAvaliacao({double? nota, String? comentario, int? idLocal}) {
-    return _$enviarAvaliacaoAsyncAction.run(() => super
-        .enviarAvaliacao(nota: nota, comentario: comentario, idLocal: idLocal));
+  Future enviarAvaliacao(
+      {double? nota, String? nome, String? comentario, int? idLocal}) {
+    return _$enviarAvaliacaoAsyncAction.run(() => super.enviarAvaliacao(
+        nota: nota, nome: nome, comentario: comentario, idLocal: idLocal));
   }
 
   final _$_AvaliacaoControllerActionController =

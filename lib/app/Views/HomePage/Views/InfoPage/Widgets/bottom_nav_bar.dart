@@ -34,7 +34,6 @@ class BottomNavBarWidget extends StatelessWidget {
     }
     return 1;
   }
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -139,7 +138,7 @@ class BottomNavBarWidget extends StatelessWidget {
         ),
       );
   }
-  //Metodo que abre o mapa
+
   openMapsSheet(context) async {
     try {
       final coords = Coords(

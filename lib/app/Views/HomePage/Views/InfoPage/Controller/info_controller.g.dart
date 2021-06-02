@@ -17,6 +17,21 @@ mixin _$InfoController on _InfoController, Store {
           name: '_InfoController.isButtonFavorite'))
       .value;
 
+  final _$dadosAtom = Atom(name: '_InfoController.dados');
+
+  @override
+  StreamController<List<AvaliacaoModel>> get dados {
+    _$dadosAtom.reportRead();
+    return super.dados;
+  }
+
+  @override
+  set dados(StreamController<List<AvaliacaoModel>> value) {
+    _$dadosAtom.reportWrite(value, super.dados, () {
+      super.dados = value;
+    });
+  }
+
   final _$botaoAtom = Atom(name: '_InfoController.botao');
 
   @override
@@ -30,6 +45,14 @@ mixin _$InfoController on _InfoController, Store {
     _$botaoAtom.reportWrite(value, super.botao, () {
       super.botao = value;
     });
+  }
+
+  final _$getAvaliacoesAsyncAction =
+      AsyncAction('_InfoController.getAvaliacoes');
+
+  @override
+  Future getAvaliacoes(int idLocal) {
+    return _$getAvaliacoesAsyncAction.run(() => super.getAvaliacoes(idLocal));
   }
 
   final _$_InfoControllerActionController =
@@ -60,6 +83,7 @@ mixin _$InfoController on _InfoController, Store {
   @override
   String toString() {
     return '''
+dados: ${dados},
 botao: ${botao},
 isButtonFavorite: ${isButtonFavorite}
     ''';

@@ -7,6 +7,10 @@ import 'package:ilovemarajo/app/Util/Controller/GoogleLoginController/google_con
 import 'package:ilovemarajo/app/Views/HomePage/Views/InfoPage/Views/Avaliacoes/Controller/avaliacao_controller.dart';
 
 class AvaliacaoPage extends StatefulWidget {
+  final int? idLocal;
+  AvaliacaoPage({
+    this.idLocal
+  });
   @override
   _AvaliacaoPageState createState() => _AvaliacaoPageState();
 }
@@ -51,10 +55,12 @@ class _AvaliacaoPageState extends State<AvaliacaoPage> {
               return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
-                  onPressed: _controller.isButtonActivate?()async{
-                    await enviarAvaliacao(
-                      star: _controller.estrelas,
-                      texto: _controller.pesquisa
+                  onPressed: _controller.isButtonActivate ? () async {
+                    _controller.enviarAvaliacao(
+                      nota: _controller.estrelas,
+                      comentario: _controller.pesquisa,
+                      idLocal: widget.idLocal,
+                      nome: _GoogleControllerPage.currentUser!.displayName
                     ).then((value) {
                       _controller.editingController.clear();
                       _controller.removeAvaliacao();
@@ -69,7 +75,8 @@ class _AvaliacaoPageState extends State<AvaliacaoPage> {
                     }).catchError((e) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text("Erro ao enviar mensagem"),
+                          content: Text(e.toString()),
+                          duration: Duration(seconds: 6),
                           backgroundColor: Colors.red,
                         )
                       );
@@ -151,6 +158,4 @@ class _AvaliacaoPageState extends State<AvaliacaoPage> {
       ),
     );
   }
-
-  Future enviarAvaliacao({String? texto,double? star}) async { } 
 }

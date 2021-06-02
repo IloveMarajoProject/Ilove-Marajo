@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:ilovemarajo/app/Views/HomePage/Views/InfoPage/Model/avaliacao_model.dart';
 
 class CardAvaliacao extends StatelessWidget {
+  final AvaliacaoModel avaliacaoModel;
+  CardAvaliacao({required this.avaliacaoModel});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -17,12 +21,12 @@ class CardAvaliacao extends StatelessWidget {
 
             Padding(
               padding: const EdgeInsets.only(left: 14,top: 10),
-              child: Text('Nome'),
+              child: Text(avaliacaoModel.nomeUsuario.toString()),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 10,top: 5),
               child: RatingBar(
-                initialRating: 2,
+                initialRating: avaliacaoModel.nota!,
                 itemSize: 15,
                 direction: Axis.horizontal,
                 allowHalfRating: true,
@@ -40,7 +44,7 @@ class CardAvaliacao extends StatelessWidget {
 
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14,vertical: 5),
-              child: Text('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'),
+              child: Text(avaliacaoModel.comentario.toString()),
             )
 
           ],

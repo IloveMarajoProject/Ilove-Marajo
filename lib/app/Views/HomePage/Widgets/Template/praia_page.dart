@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:ilovemarajo/app/Util/Exception/publicMessageException.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Controller/home_controller.dart';
@@ -49,9 +50,7 @@ class _PraiaPageState extends State<PraiaPage> {
                 );
               } else if (!snapshot.hasData) {
                 return Center(
-                  child: CircularProgressIndicator(
-                    backgroundColor: Colors.red,
-                  ),
+                  child: Text('Carregando...',style: TextStyle(fontSize: 30,color: Colors.red))
                 );
               }
               List<PraiaModel>? dados = snapshot.data;
@@ -66,11 +65,7 @@ class _PraiaPageState extends State<PraiaPage> {
                 itemBuilder: (context, index) {
                   return ListaWidget(
                     praiaModel: dados[index],
-                    onTapNavigator: (){
-                      Navigator.of(context).push(
-                        MaterialPageRoute(builder: (_) => InfoPage(dados[index]))
-                      );
-                    },
+                    optionsNavigator: OptionsNavigator.praias,
                   );
                 },
               );

@@ -3,11 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Models/praia.dart';
 import 'package:ilovemarajo/app/Views/HomePage/Views/InfoPage/info_page.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ilovemarajo/app/Views/HomePage/Widgets/Template/praia_page.dart';
+
+enum OptionsNavigator{
+  praias,
+  restaurantes,
+  hoteis
+}
 
 class ListaWidget extends StatelessWidget{
   final PraiaModel? praiaModel;
-  final VoidCallback onTapNavigator;
-  ListaWidget({this.praiaModel, required this.onTapNavigator});
+  final OptionsNavigator optionsNavigator;
+  ListaWidget({this.praiaModel, required this.optionsNavigator});
 
   String get nomeLocal {
     if(praiaModel != null){
@@ -33,16 +40,36 @@ class ListaWidget extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      splashColor: Colors.blue,
-      onTap: () => this.onTapNavigator(),
-      child: CachedNetworkImage(
-        imageUrl: fotoLocal,
-        placeholder: (context, url) => Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Center(child: CircularProgressIndicator(backgroundColor: Colors.red)),
-        ),
-        imageBuilder:(context, imageProvider) => Container(
+    return CachedNetworkImage(
+      imageUrl: fotoLocal,
+      placeholder: (context, url) => Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Center(
+          child: CircularProgressIndicator(backgroundColor: Colors.red)),
+      ),
+      imageBuilder:(context, imageProvider) => InkWell(
+        onTap: (){
+          switch (optionsNavigator) {
+            case OptionsNavigator.praias:
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => InfoPage(
+                  praiaModel: praiaModel, 
+                  imageProvider: imageProvider
+                  )
+                )
+              );
+              break;
+
+            case OptionsNavigator.hoteis:
+              print('teste');
+              break;
+
+            case OptionsNavigator.restaurantes:
+              print('teste');
+              break;
+          }
+        },
+        child: Container(
           margin: EdgeInsets.all(10),
           decoration: BoxDecoration(
             color: Colors.blue,

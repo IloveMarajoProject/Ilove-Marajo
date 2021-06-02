@@ -31,10 +31,11 @@ abstract class _AvaliacaoController with Store {
   void removeAvaliacao()=> pesquisa = '';
 
   @action
-  enviarAvaliacao({double? nota, String? comentario, int? idLocal}) async {
+  enviarAvaliacao({double? nota,String? nome, String? comentario, int? idLocal}) async {
     await avaliacaoService.enviarAvaliacao(
       comentario: comentario,
       idLocal: idLocal,
+      nome: nome,
       nota: nota
     );
   }
