@@ -1,26 +1,15 @@
-import 'dart:async';
-import 'dart:convert';
-
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:ilovemarajo/app/Util/Controller/GoogleLoginController/google_controller.dart';
 import 'package:ilovemarajo/app/Util/Controller/SharedPreference/shared_preference.dart';
-import 'package:ilovemarajo/app/Util/VariaveisGlobais.dart';
-import 'package:ilovemarajo/app/Util/Widgets/showDialog.dart';
 import 'package:ilovemarajo/app/Util/Widgets/showDialogTwoButtons.dart';
 import 'package:ilovemarajo/app/Views/Home/Controller/home_controller.dart';
-import 'package:ilovemarajo/app/Views/Home/Views/PagesApoio/praia_page.dart';
-import 'package:ilovemarajo/app/Views/Home/Widgets/icon_widget.dart';
+import 'package:ilovemarajo/app/Util/Widgets/icon_widget.dart';
+import 'package:ilovemarajo/app/Views/Home/Views/PagesIconHome/praia_page.dart';
 import 'package:ilovemarajo/app/Views/Home/Widgets/lista_widget_popular.dart';
 import 'package:ilovemarajo/app/Views/Initial/Models/municipio.dart';
-import 'package:mobx/mobx.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
   final MunicipioModel dadosMuncipio;

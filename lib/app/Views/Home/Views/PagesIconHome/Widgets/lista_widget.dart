@@ -2,7 +2,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:ilovemarajo/app/Views/Home/Models/praia.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:ilovemarajo/app/Views/Home/Views/PagesApoio/praia_page.dart';
 import 'package:ilovemarajo/app/Views/Home/Views/PagesIconHome/Views/InfoPage/info_page.dart';
 
 enum OptionsNavigator{
@@ -28,14 +27,6 @@ class ListaWidget extends StatelessWidget{
       return praiaModel!.foto.toString();
     }
     return 'Erro';
-  }
-
-  String get estrelasLocal {
-
-    if(praiaModel != null){
-      return praiaModel!.avaliacao.toString();
-    }
-    return '4.5';
   }
 
   @override
@@ -93,39 +84,27 @@ class ListaWidget extends StatelessWidget{
             ),
             child: Column(
               children: [
-                Align(
-                  alignment: Alignment.topRight,
-                  child: Container(
-                    margin: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: Colors.white24,
-                      borderRadius: BorderRadius.circular(10)
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(estrelasLocal,
-                            style: TextStyle(fontSize: 20,color: Colors.white)
-                          ),
-                          Icon(Icons.star,color: Colors.white,)
-                        ],
-                      ),
-                    ),
-                  )
-                ),
 
                 Align(
-                  alignment: Alignment.bottomLeft,
+                  alignment: Alignment.center,
                   child: Padding(
-                    padding: EdgeInsets.only(left: 20,bottom: 20,top: 110),
-                    child: AutoSizeText(
-                      nomeLocal,
-                      style: TextStyle(
-                        fontSize: 25,
+                    padding: EdgeInsets.only(top: 150),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 80,vertical: 15),
+                      decoration: BoxDecoration(
                         color: Colors.white,
-                        fontWeight: FontWeight.bold
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(12),
+                          topRight: Radius.circular(12)
+                        )
+                      ),
+                      child: AutoSizeText(
+                        nomeLocal,
+                        style: TextStyle(
+                          fontSize: 25,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold
+                        ),
                       ),
                     ),
                   ),

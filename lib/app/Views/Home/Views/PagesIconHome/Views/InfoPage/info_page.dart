@@ -100,15 +100,13 @@ class _InfoPageState extends State<InfoPage> with SingleTickerProviderStateMixin
                 left: 0,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Expanded(
-                    child: AutoSizeText(
-                      nomeLocal,
-                      maxLines: 1,
-                      style: TextStyle(
-                        fontSize: 35,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white
-                      ),
+                  child: AutoSizeText(
+                    nomeLocal,
+                    maxLines: 1,
+                    style: TextStyle(
+                      fontSize: 35,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white
                     ),
                   ),
                 ),
@@ -122,7 +120,6 @@ class _InfoPageState extends State<InfoPage> with SingleTickerProviderStateMixin
             length: listaTabBar.length,
             initialIndex: 0, 
             child: Expanded(
-              flex: 1,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
