@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:ilovemarajo/app/Util/Controller/GoogleLoginController/google_controller.dart';
+import 'package:ilovemarajo/app/Shared/Controller/GoogleLoginController/google_controller.dart';
 import 'package:ilovemarajo/app/Views/Home/Views/PagesIconHome/Views/InfoPage/Views/Avaliacoes/Controller/avaliacao_controller.dart';
 
 class AvaliacaoPage extends StatefulWidget {

@@ -17,21 +17,6 @@ mixin _$HomeController on _HomeController, Store {
           name: '_HomeController.isButtonActivate'))
       .value;
 
-  final _$dadosAtom = Atom(name: '_HomeController.dados');
-
-  @override
-  StreamController<List<PraiaModel>> get dados {
-    _$dadosAtom.reportRead();
-    return super.dados;
-  }
-
-  @override
-  set dados(StreamController<List<PraiaModel>> value) {
-    _$dadosAtom.reportWrite(value, super.dados, () {
-      super.dados = value;
-    });
-  }
-
   final _$pesquisaAtom = Atom(name: '_HomeController.pesquisa');
 
   @override
@@ -78,15 +63,6 @@ mixin _$HomeController on _HomeController, Store {
     });
   }
 
-  final _$pegarPraiasDoMunicipiosAsyncAction =
-      AsyncAction('_HomeController.pegarPraiasDoMunicipios');
-
-  @override
-  Future pegarPraiasDoMunicipios(String municipio) {
-    return _$pegarPraiasDoMunicipiosAsyncAction
-        .run(() => super.pegarPraiasDoMunicipios(municipio));
-  }
-
   final _$_HomeControllerActionController =
       ActionController(name: '_HomeController');
 
@@ -115,7 +91,6 @@ mixin _$HomeController on _HomeController, Store {
   @override
   String toString() {
     return '''
-dados: ${dados},
 pesquisa: ${pesquisa},
 editingController: ${editingController},
 validacao: ${validacao},

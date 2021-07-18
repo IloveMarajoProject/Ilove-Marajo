@@ -13,10 +13,16 @@ abstract class _GoogleLoginController with Store {
   GoogleSignIn googleSignIn = GoogleSignIn();
 
   @observable
+  String? token;
+
+  @observable
   User? currentUser; 
 
   @observable
   bool loading = false;
+
+  @computed
+  bool get validadeUser => currentUser != null;
 
   @action
   void setUser(User? user)=> currentUser = user;
@@ -27,23 +33,23 @@ abstract class _GoogleLoginController with Store {
   }
 
   @action
+  verifyUser(){
+    FirebaseAuth.instance.authStateChanges().listen((user) => setUser(user));
+  }
+
+  @action
   Future<User?> getUser(BuildContext context) async {
     loading = true;
     if (currentUser != null) return currentUser;
 
     try {
-      final GoogleSignInAccount googleSignInAccount = (await googleSignIn
-          .signIn())!;
-      final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount
-          .authentication;
-
+      final GoogleSignInAccount googleSignInAccount = (await googleSignIn.signIn())!;
+      final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
       final AuthCredential credential = GoogleAuthProvider.credential(
         idToken: googleSignInAuthentication.idToken,
         accessToken: googleSignInAuthentication.accessToken,
       );
-
-      var authResult = await FirebaseAuth.instance
-          .signInWithCredential(credential);
+      var authResult = await FirebaseAuth.instance.signInWithCredential(credential);
 
       final User user = authResult.user!;
 

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:ilovemarajo/app/Views/Home/Models/praia.dart';
+import 'package:ilovemarajo/app/Views/Home/Views/PagesIconHome/Models/praiaModel.dart';
 import 'package:ilovemarajo/app/Views/Home/Views/PagesIconHome/Views/InfoPage/Controller/info_controller.dart';
 import 'package:ilovemarajo/app/Views/Home/Views/PagesIconHome/Views/InfoPage/Views/Avaliacoes/avaliacoes_page.dart';
 import 'package:map_launcher/map_launcher.dart';

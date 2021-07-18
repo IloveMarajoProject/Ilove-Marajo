@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:ilovemarajo/app/Views/Home/Models/praia.dart';
+import 'package:ilovemarajo/app/Views/Home/Views/PagesIconHome/Models/praiaModel.dart';
 import 'package:ilovemarajo/app/Views/Home/Views/PagesIconHome/Views/InfoPage/Widgets/TabBarWidgets/avaliacoes_tab.dart';
 import 'package:ilovemarajo/app/Views/Home/Views/PagesIconHome/Views/InfoPage/Widgets/TabBarWidgets/descricao_tab.dart';
 import 'package:ilovemarajo/app/Views/Home/Views/PagesIconHome/Views/InfoPage/Widgets/TabBarWidgets/fotos_tab.dart';

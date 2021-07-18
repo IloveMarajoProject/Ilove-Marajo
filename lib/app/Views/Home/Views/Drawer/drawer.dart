@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:ilovemarajo/app/Util/Controller/GoogleLoginController/google_controller.dart';
-import 'package:ilovemarajo/app/Util/Controller/SharedPreference/shared_preference.dart';
+import 'package:ilovemarajo/app/Shared/Controller/GoogleLoginController/google_controller.dart';
+import 'package:ilovemarajo/app/Shared/Controller/SharedPreference/shared_preference.dart';
 
 class DrawerPage extends StatefulWidget {
   final User? currentUser;
@@ -12,7 +12,7 @@ class DrawerPage extends StatefulWidget {
 }
 
 class _DrawerPageState extends State<DrawerPage> {
-  SharedPreferenceController _preferenceController = SharedPreferenceController();
+  GoogleLoginController _controller = GoogleLoginController();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -68,7 +68,7 @@ class _DrawerPageState extends State<DrawerPage> {
               ),
               onPressed: (){
                 Navigator.of(context).popAndPushNamed('/tela1').then((value) {
-                  _preferenceController.loginClose();
+                  _controller.logoutGoogle();
                 });
               },
               style: ElevatedButton.styleFrom(

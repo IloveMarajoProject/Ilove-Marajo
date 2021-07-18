@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class PraiaModel {
   int? idPraia;
   String? nomePraia;

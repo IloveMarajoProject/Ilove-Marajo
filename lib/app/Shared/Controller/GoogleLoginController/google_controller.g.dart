@@ -9,6 +9,14 @@ part of 'google_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$GoogleLoginController on _GoogleLoginController, Store {
+  Computed<bool>? _$validadeUserComputed;
+
+  @override
+  bool get validadeUser =>
+      (_$validadeUserComputed ??= Computed<bool>(() => super.validadeUser,
+              name: '_GoogleLoginController.validadeUser'))
+          .value;
+
   final _$googleSignInAtom = Atom(name: '_GoogleLoginController.googleSignIn');
 
   @override
@@ -21,6 +29,21 @@ mixin _$GoogleLoginController on _GoogleLoginController, Store {
   set googleSignIn(GoogleSignIn value) {
     _$googleSignInAtom.reportWrite(value, super.googleSignIn, () {
       super.googleSignIn = value;
+    });
+  }
+
+  final _$tokenAtom = Atom(name: '_GoogleLoginController.token');
+
+  @override
+  String? get token {
+    _$tokenAtom.reportRead();
+    return super.token;
+  }
+
+  @override
+  set token(String? value) {
+    _$tokenAtom.reportWrite(value, super.token, () {
+      super.token = value;
     });
   }
 
@@ -87,11 +110,24 @@ mixin _$GoogleLoginController on _GoogleLoginController, Store {
   }
 
   @override
+  dynamic verifyUser() {
+    final _$actionInfo = _$_GoogleLoginControllerActionController.startAction(
+        name: '_GoogleLoginController.verifyUser');
+    try {
+      return super.verifyUser();
+    } finally {
+      _$_GoogleLoginControllerActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 googleSignIn: ${googleSignIn},
+token: ${token},
 currentUser: ${currentUser},
-loading: ${loading}
+loading: ${loading},
+validadeUser: ${validadeUser}
     ''';
   }
 }

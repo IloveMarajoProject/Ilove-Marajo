@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:ilovemarajo/app/Shared/Controller/GoogleLoginController/google_controller.dart';
 import 'package:ilovemarajo/app/Views/Initial/initital_page.dart';
 import 'package:ilovemarajo/app/Views/Liquid/liquid_page.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -33,25 +35,18 @@ class Validacao extends StatefulWidget {
 }
 
 class _ValidacaoState extends State<Validacao> {
-  bool? validacao;
 
-  Future<bool?> getPageLogin() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      validacao = prefs.getBool('validar');
-      print(validacao.toString());
-    });
-  }
+  final GoogleLoginController _googleControllerPage = GoogleLoginController();
 
   @override
     void initState() {
       // TODO: implement initState
       super.initState();
-      getPageLogin();
+      _googleControllerPage.verifyUser();
     }
   @override
   Widget build(BuildContext context) {
-    if(validacao == true){
+    if(_googleControllerPage.validadeUser){
       return InitialPage();
     }
     return LiquidPage();

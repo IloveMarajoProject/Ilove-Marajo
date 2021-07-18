@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:ilovemarajo/app/Util/Exception/publicMessageException.dart';
-import 'package:ilovemarajo/app/Util/VariaveisGlobais.dart';
+import 'package:ilovemarajo/app/Shared/Exception/publicMessageException.dart';
+import 'package:ilovemarajo/app/Shared/VariaveisGlobais.dart';
 import 'package:ilovemarajo/app/Views/Home/Views/PagesIconHome/Views/InfoPage/Model/avaliacao_model.dart';
 
 class InfoPageService {

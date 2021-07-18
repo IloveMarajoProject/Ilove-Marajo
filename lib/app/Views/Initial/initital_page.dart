@@ -5,7 +5,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ilovemarajo/app/Util/Exception/publicMessageException.dart';
 import 'package:ilovemarajo/app/Views/Initial/Controller/initial_controller.dart';
 import 'package:ilovemarajo/app/Views/Initial/Models/municipio.dart';
 import 'package:ilovemarajo/app/Views/Initial/Widgets/municipios_nome.dart';

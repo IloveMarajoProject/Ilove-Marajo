@@ -2,11 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:ilovemarajo/app/Util/Controller/GoogleLoginController/google_controller.dart';
-import 'package:ilovemarajo/app/Util/Controller/SharedPreference/shared_preference.dart';
-import 'package:ilovemarajo/app/Util/Widgets/showDialogTwoButtons.dart';
+import 'package:ilovemarajo/app/Shared/Controller/GoogleLoginController/google_controller.dart';
+import 'package:ilovemarajo/app/Shared/Controller/SharedPreference/shared_preference.dart';
+import 'package:ilovemarajo/app/Shared/Widgets/icon_widget.dart';
+import 'package:ilovemarajo/app/Shared/Widgets/showDialogTwoButtons.dart';
 import 'package:ilovemarajo/app/Views/Home/Controller/home_controller.dart';
-import 'package:ilovemarajo/app/Util/Widgets/icon_widget.dart';
 import 'package:ilovemarajo/app/Views/Home/Views/PagesIconHome/praia_page.dart';
 import 'package:ilovemarajo/app/Views/Home/Widgets/lista_widget_popular.dart';
 import 'package:ilovemarajo/app/Views/Initial/Models/municipio.dart';
@@ -23,18 +23,11 @@ class _HomePageState extends State<HomePage> {
   HomeController controller = HomeController();
   GoogleLoginController _googleControllerPage = GoogleLoginController();
   SharedPreferenceController _preferenceController = SharedPreferenceController();
-    @override
-    void initState() {
-      // TODO: implement initState
-      super.initState();
-      FirebaseAuth.instance
-        .authStateChanges()
-        .listen((user) {
-          setState(() {
-           _googleControllerPage.setUser(user);            
-          });
-        });
-    }
+  @override
+  void initState() {
+    super.initState();
+    _googleControllerPage.verifyUser();
+  }
   @override
     void dispose() {
       controller.editingController.dispose();
@@ -43,7 +36,6 @@ class _HomePageState extends State<HomePage> {
 
   void actionButtonShow(context)async{
     await _googleControllerPage.logoutGoogle();
-    _preferenceController.loginClose();
     Navigator.of(context).popAndPushNamed('/tela1');
   }
   @override
@@ -68,7 +60,7 @@ class _HomePageState extends State<HomePage> {
                               IconButton(
                                 icon: Icon(Icons.logout),
                                 iconSize: 35,
-                                onPressed: (){
+                                onPressed: () async {
                                   showDialog(
                                     context: context, 
                                     builder: (context){
@@ -114,7 +106,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                             TextSpan(
-                              text: ' ${_googleControllerPage.currentUser?.displayName.toString()}!!\n',
+                              text: ' ${_googleControllerPage.currentUser?.displayName}!!\n',
                               style: TextStyle(
                                 fontSize: 20,
                                 color: Colors.blue,

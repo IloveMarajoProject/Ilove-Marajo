@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:ilovemarajo/app/Util/Exception/publicMessageException.dart';
 import 'package:ilovemarajo/app/Views/Home/Controller/home_controller.dart';
-import 'package:ilovemarajo/app/Views/Home/Models/praia.dart';
+import 'package:ilovemarajo/app/Views/Home/Views/PagesIconHome/Controller/pages_icon_controller.dart';
+import 'package:ilovemarajo/app/Views/Home/Views/PagesIconHome/Models/praiaModel.dart';
 import 'package:ilovemarajo/app/Views/Home/Views/PagesIconHome/Widgets/app_bar.dart';
 import 'package:ilovemarajo/app/Views/Home/Views/PagesIconHome/Widgets/lista_widget.dart';
 import 'package:ilovemarajo/app/Views/Initial/Models/municipio.dart';
@@ -15,7 +15,7 @@ class PraiaPage extends StatefulWidget {
 }
 
 class _PraiaPageState extends State<PraiaPage> {
-  HomeController controller = HomeController();
+  PagesIconController controller = PagesIconController();
   @override
   void initState() {
     // TODO: implement initState

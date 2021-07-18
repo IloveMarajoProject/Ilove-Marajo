@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:ilovemarajo/app/Util/Controller/GoogleLoginController/google_controller.dart';
-import 'package:ilovemarajo/app/Util/Controller/SharedPreference/shared_preference.dart';
-import 'package:ilovemarajo/app/Util/Widgets/showDialog.dart';
+import 'package:ilovemarajo/app/Shared/Controller/GoogleLoginController/google_controller.dart';
+import 'package:ilovemarajo/app/Shared/Controller/SharedPreference/shared_preference.dart';
+import 'package:ilovemarajo/app/Shared/Widgets/showDialog.dart';
 import 'package:ilovemarajo/app/Views/Initial/initital_page.dart';
 import 'package:ilovemarajo/app/Views/Liquid/Model/data.dart';
 import 'package:auth_buttons/auth_buttons.dart';
