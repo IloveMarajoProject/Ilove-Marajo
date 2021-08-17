@@ -21,15 +21,8 @@ class _AvaliacaoPageState extends State<AvaliacaoPage> {
   GoogleLoginController _GoogleControllerPage = GoogleLoginController();
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    FirebaseAuth.instance
-      .authStateChanges()
-      .listen((user) {
-        setState(() {
-          _GoogleControllerPage.setUser(user);            
-        });
-      });
+    _GoogleControllerPage.verifyUser();
   }
   @override
   Widget build(BuildContext context) {

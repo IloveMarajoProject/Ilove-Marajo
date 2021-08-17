@@ -6,7 +6,7 @@ class PraiaModel {
   String? lat;
   String? lon;
   double? avaliacao;
-  String? municipio;
+  int? municipio;
 
   PraiaModel(
       {this.idPraia,
@@ -26,7 +26,7 @@ class PraiaModel {
     lat = json['lat'];
     lon = json['lon'];
     avaliacao = json['avaliacao'] is int ? (json['avaliacao'] as int).toDouble() : json['avaliacao'];
-    municipio = json['municipio'];
+    municipio = json['id_municipio'];
   }
 
   Map<String, dynamic> toJson() {
@@ -38,7 +38,7 @@ class PraiaModel {
     data['lat'] = this.lat;
     data['lon'] = this.lon;
     data['avaliacao'] = this.avaliacao;
-    data['municipio'] = this.municipio;
+    data['id_municipio'] = this.municipio;
     return data;
   }
 

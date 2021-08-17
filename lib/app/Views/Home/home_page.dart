@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
 
   void actionButtonShow(context)async{
     await _googleControllerPage.logoutGoogle();
-    Navigator.of(context).popAndPushNamed('/tela1');
+    Navigator.of(context).popAndPushNamed('/auth');
   }
   @override
   Widget build(BuildContext context) {

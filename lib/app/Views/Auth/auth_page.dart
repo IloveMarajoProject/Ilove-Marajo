@@ -1,16 +1,16 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:ilovemarajo/app/Views/Liquid/Model/data.dart';
-import 'package:ilovemarajo/app/Views/Liquid/Widgets/container_liquid.dart';
-import 'package:ilovemarajo/app/Views/Liquid/Widgets/container_liquid_final.dart';
+import 'package:ilovemarajo/app/Views/Auth/Model/data.dart';
+import 'package:ilovemarajo/app/Views/Auth/Widgets/container_liquid.dart';
+import 'package:ilovemarajo/app/Views/Auth/Widgets/container_liquid_final.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
 
-class LiquidPage extends StatefulWidget {
+class AuthPage extends StatefulWidget {
   @override
   _LiquidPage createState() => _LiquidPage();
 }
 
-class _LiquidPage extends State<LiquidPage> {
+class _LiquidPage extends State<AuthPage> {
   int indexTamanho = 0;
   LiquidController? liquidController;
   UpdateType? updateType;

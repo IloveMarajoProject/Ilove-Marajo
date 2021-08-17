@@ -3,11 +3,8 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:ilovemarajo/app/Shared/Controller/GoogleLoginController/google_controller.dart';
 import 'package:ilovemarajo/app/Shared/Controller/SharedPreference/shared_preference.dart';
 import 'package:ilovemarajo/app/Shared/Widgets/showDialog.dart';
-import 'package:ilovemarajo/app/Views/Initial/initital_page.dart';
-import 'package:ilovemarajo/app/Views/Liquid/Model/data.dart';
 import 'package:auth_buttons/auth_buttons.dart';
-import 'package:liquid_swipe/liquid_swipe.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:ilovemarajo/app/Views/Auth/Model/data.dart';
 
 class ContainerLiquidFinal extends StatefulWidget {
   final ItemData data;
@@ -51,9 +48,7 @@ class _ContainerLiquidFinalState extends State<ContainerLiquidFinal> {
                 onPressed: () {
                   _liquidController.getUser(context).then((value) {
                     _sharedPreferenceController.loginAuth();
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (_)=>InitialPage())
-                    );
+                    Navigator.of(context).pushReplacementNamed('/initial');
                   }).catchError((e){
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(

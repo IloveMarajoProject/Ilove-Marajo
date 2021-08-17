@@ -22,7 +22,6 @@ class _InitialPageState extends State<InitialPage> {
 
   @override
     void initState() {
-      // TODO: implement initState
       super.initState();
       controller.pegarDadosMunicipio().catchError((e){
         return ScaffoldMessenger.of(context)

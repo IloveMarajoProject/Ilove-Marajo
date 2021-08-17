@@ -18,7 +18,6 @@ class _PraiaPageState extends State<PraiaPage> {
   PagesIconController controller = PagesIconController();
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     controller.pegarPraiasDoMunicipios(widget.dadosMuncipio.nome_municipios.toString())
       .catchError((e){

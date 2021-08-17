@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ilovemarajo/app/Views/Liquid/Model/data.dart';
+import 'package:ilovemarajo/app/Views/Auth/Model/data.dart';
 
 class ContainerLiquid extends StatelessWidget {
   final ItemData data;

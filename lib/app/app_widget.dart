@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ilovemarajo/app/Shared/Controller/GoogleLoginController/google_controller.dart';
+import 'package:ilovemarajo/app/Views/Auth/auth_page.dart';
 import 'package:ilovemarajo/app/Views/Initial/initital_page.dart';
-import 'package:ilovemarajo/app/Views/Liquid/liquid_page.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -12,7 +12,8 @@ class Myapp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: <String,WidgetBuilder>{
-        '/tela1': (BuildContext context) => LiquidPage(),
+        '/auth': (BuildContext context) => AuthPage(),
+        '/initial': (BuildContext context) => InitialPage()
       },
       debugShowCheckedModeBanner: false,
       builder: (context,widget)=>ResponsiveWrapper.builder(
@@ -49,6 +50,6 @@ class _ValidacaoState extends State<Validacao> {
     if(_googleControllerPage.validadeUser){
       return InitialPage();
     }
-    return LiquidPage();
+    return AuthPage();
   }
 }
