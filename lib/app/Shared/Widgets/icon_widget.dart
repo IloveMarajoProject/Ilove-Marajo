@@ -19,7 +19,7 @@ class IconWidgetPontos extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: ()=> this.ontap(),
+      onTap: ontap,
       child: Column(
         children: [
           Container(
