@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:ilovemarajo/app/modules/home/models/praiaModel.dart';
 import 'package:ilovemarajo/app/modules/home/pages/categoria/pages/detalhes/widgets/bottom_nav_bar.dart';
+import 'package:ilovemarajo/app/modules/home/pages/categoria/pages/detalhes/widgets/tab_bar_views/descricao_tab.dart';
 
 class DetalhesPage extends StatefulWidget {
   final PraiaModel praiaModel;
@@ -20,13 +21,7 @@ class _DetalhesPageState extends State<DetalhesPage> with SingleTickerProviderSt
 
   List<Widget> listaConteudoTabBar () {
     return [
-      Container(
-        child: ListView(
-          children: [
-            Text(widget.praiaModel.descricao!)
-          ],
-        ),
-      ),
+      DescricaoTab(widget.praiaModel),
       Container(),
       Container(),
     ];

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ilovemarajo/app/modules/home/models/praiaModel.dart';
+import 'package:ilovemarajo/app/modules/home/pages/categoria/pages/detalhes/page/avaliar/avaliar_page.dart';
 import 'package:map_launcher/map_launcher.dart';
 
 class BottomNavBarWidget extends StatelessWidget {
@@ -55,7 +56,14 @@ class BottomNavBarWidget extends StatelessWidget {
             SizedBox(width: 20),
             Expanded(
               child: InkWell(
-                onTap: (){},
+                onTap: (){
+                  showCupertinoDialog(
+                    context: context,
+                    builder: (_){
+                      return AvaliarPage();
+                    }
+                  );
+                },
                 child: Container(
                   height: 50,
                   width: 50,
