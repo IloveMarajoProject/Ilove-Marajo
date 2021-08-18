@@ -63,6 +63,27 @@ class _HomePageState extends State<HomePage> {
                           );
                         },
                       ),
+                      ShaderMask(
+                        shaderCallback: (_){
+                          return RadialGradient(
+                            center: Alignment.centerRight,
+                            radius: 1.0,
+                            tileMode: TileMode.mirror,
+                            colors: [
+                              Colors.green,
+                              Colors.blue,
+                            ]
+                          ).createShader(_);
+                        },
+                        child: Text(
+                          'Ilove Marajó',
+                          style: TextStyle(
+                            fontSize: 30,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
                       ClipRRect(
                         borderRadius: BorderRadius.circular(32),
                         child: Image.network('${_googleControllerPage.currentUser?.photoURL.toString()}',
@@ -158,7 +179,7 @@ class _HomePageState extends State<HomePage> {
           ),
 
           Padding(
-            padding: const EdgeInsets.only(left: 20,top: 40,bottom: 20),
+            padding: const EdgeInsets.only(left: 20,top: 30,bottom: 20),
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text(
