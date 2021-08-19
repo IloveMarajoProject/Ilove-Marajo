@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:ilovemarajo/app/Views/Initial/initital_page.dart';
-import 'package:ilovemarajo/app/Views/Liquid/liquid_page.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:ilovemarajo/app/Shared/controller/google_login/google_controller.dart';
+import 'package:ilovemarajo/app/modules/auth/auth_page.dart';
+import 'package:ilovemarajo/app/modules/initial/initital_page.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -10,7 +13,8 @@ class Myapp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: <String,WidgetBuilder>{
-        '/tela1': (BuildContext context) => LiquidPage(),
+        '/auth': (BuildContext context) => AuthPage(),
+        '/initial': (BuildContext context) => InitialPage()
       },
       debugShowCheckedModeBanner: false,
       builder: (context,widget)=>ResponsiveWrapper.builder(
@@ -21,8 +25,8 @@ class Myapp extends StatelessWidget {
             ResponsiveBreakpoint.resize(450, name: MOBILE),
             ResponsiveBreakpoint.resize(800, name: TABLET),
         ]
-        ),
-      home: Validacao()  
+      ),
+      home: Validacao(),
     );
   }
 }
@@ -33,27 +37,20 @@ class Validacao extends StatefulWidget {
 }
 
 class _ValidacaoState extends State<Validacao> {
-  bool? validacao;
 
-  Future<bool?> getPageLogin() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      validacao = prefs.getBool('validar');
-      print(validacao.toString());
-    });
-  }
+  GoogleLoginController _googleControllerPage = GoogleLoginController();
 
   @override
     void initState() {
-      // TODO: implement initState
       super.initState();
-      getPageLogin();
+      _googleControllerPage.verifyUser();
     }
+
   @override
   Widget build(BuildContext context) {
-    if(validacao == true){
+    if(_googleControllerPage.validadeUser){
       return InitialPage();
     }
-    return LiquidPage();
+    return AuthPage();
   }
 }
